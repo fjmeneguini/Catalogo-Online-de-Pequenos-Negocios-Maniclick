@@ -1,6 +1,6 @@
 # Catálogo Online de Pequenos Negócios - "ManiClick"
 
-- [Acesse o site hospedado aqui]([https://SEULINKDOFIREBASE.web.app](https://copn---maniclick.web.app/))
+- [Acesse o site hospedado aqui]([https://SEULINKDOFIREBASE.web.app](https://copn---maniclick.web.app/)
 - [Repositório com o código-fonte](https://github.com/fjmeneguini/Catalogo-Online-de-Pequenos-Negocios-Maniclick)
 
 O ManiClick é um site desenvolvido para facilitar a vida de uma manicure autônoma, oferecendo uma plataforma simples e intuitiva para divulgar seus serviços, atrair novos clientes e organizar seus agendamentos online. 
