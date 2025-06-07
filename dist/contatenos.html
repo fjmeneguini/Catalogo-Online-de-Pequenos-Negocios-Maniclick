@@ -72,12 +72,6 @@
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
-  <script>
-    // Faz o campo _replyto receber o valor do campo email antes de enviar
-    document.getElementById('form-contatenos').addEventListener('submit', function(e) {
-      var email = document.getElementById('email').value;
-      this.querySelector('input[name="_replyto"]').value = email;
-    });
-  </script>
+  <script src="contatenos.js"></script>
 </body>
 </html>
