@@ -72,8 +72,8 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // Carregar equipe do Firestore (coleção: equipe)
-    db.collection("equipe").get().then((querySnapshot) => {
+    // Carregar equipe do Firestore (coleção: equipe), ordenando por nome
+    db.collection("equipe").orderBy("nome").get().then((querySnapshot) => {
       const grid = document.getElementById('equipe-grid');
       let html = '';
       querySnapshot.forEach((doc) => {
@@ -82,6 +82,7 @@
           <div class="membro">
             <img src="${membro.foto}" alt="${membro.nome}">
             <h3>${membro.nome}</h3>
+            <p>${membro.funcao ? membro.funcao : ''}</p>
             <p>${membro.rm ? membro.rm : ''}</p>
           </div>
         `;
