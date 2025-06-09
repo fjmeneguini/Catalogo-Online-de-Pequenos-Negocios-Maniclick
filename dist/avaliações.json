@@ -1,0 +1,62 @@
+[
+  {
+    "cliente": "Ana Paula",
+    "nota": 5,
+    "comentario": "A Sandra é maravilhosa, sempre atenciosa e pontual!"
+  },
+  {
+    "cliente": "Bruna Silva",
+    "nota": 5,
+    "comentario": "Minhas unhas nunca ficaram tão bonitas. Recomendo!"
+  },
+  {
+    "cliente": "Carla Mendes",
+    "nota": 5,
+    "comentario": "Atendimento impecável e ambiente super agradável."
+  },
+  {
+    "cliente": "Daniela R.",
+    "nota": 5,
+    "comentario": "Pontualidade e capricho em cada detalhe. Adorei!"
+  },
+  {
+    "cliente": "Elisa T.",
+    "nota": 5,
+    "comentario": "Sempre saio satisfeita, super indico!"
+  },
+  {
+    "cliente": "Fernanda L.",
+    "nota": 5,
+    "comentario": "Ótima profissional, muito dedicada."
+  },
+  {
+    "cliente": "Gabriela F.",
+    "nota": 5,
+    "comentario": "Me senti muito bem cuidada, voltarei sempre."
+  },
+  {
+    "cliente": "Helena V.",
+    "nota": 5,
+    "comentario": "Unhas lindas e atendimento nota 10!"
+  },
+  {
+    "cliente": "Isabela D.",
+    "nota": 5,
+    "comentario": "Ambiente limpo e confortável, amei!"
+  },
+  {
+    "cliente": "Juliana C.",
+    "nota": 5,
+    "comentario": "Sandra tem mãos de fada, recomendo demais!"
+  },
+  {
+    "cliente": "Larissa G.",
+    "nota": 5,
+    "comentario": "Sempre inovando nas decorações, adoro!"
+  },
+  {
+    "cliente": "Mariana E.",
+    "nota": 5,
+    "comentario": "Ótimo preço e serviço de qualidade."
+  }
+]
