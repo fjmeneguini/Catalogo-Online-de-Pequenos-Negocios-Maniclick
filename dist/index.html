@@ -47,19 +47,8 @@
   <section class="servicos" id="servicos" data-aos="fade-up">
     <div class="container">
       <h2 class="titulo-sessao">Serviços</h2>
-      <ul>
-        <li><strong>Esmaltação simples</strong> – R$ 20,00 (30 min)</li>
-        <li><strong>Francesinha</strong> – R$ 25,00 (40 min)</li>
-        <li><strong>Unha decorada</strong> – R$ 30,00 (50 min)</li>
-        <li><strong>Pé e mão</strong> – R$ 45,00 (1h)</li>
-        <li><strong>Blindagem de unhas</strong> – R$ 35,00 (50 min)</li>
-        <li><strong>Unhas em gel</strong> – R$ 115,00 (1h 30min)</li>
-        <li><strong>Alongamento fibra de vidro</strong> – R$ 90,00 (2h)</li>
-        <li><strong>Remoção de gel/fibra</strong> – R$ 30,00 (40 min)</li>
-        <li><strong>Spa dos pés</strong> – R$ 40,00 (50 min)</li>
-        <li><strong>Hidratação de cutículas</strong> – R$ 18,00 (20 min)</li>
-        <li><strong>Unhas infantis</strong> – R$ 15,00 (20 min)</li>
-        <li><strong>Decoração artística</strong> – R$ 35,00 (40 min)</li>
+      <ul id="lista-servicos">
+        <!-- Serviços serão carregados via JS -->
       </ul>
     </div>
   </section>
@@ -91,19 +80,8 @@
   <section class="depoimentos" id="avaliacoes" data-aos="fade-up">
     <div class="container">
       <h2 class="titulo-sessao">Avaliações</h2>
-      <div class="depoimentos-grid">
-        <blockquote>"A Sandra é maravilhosa, sempre atenciosa e pontual!"<span>- Ana P.</span></blockquote>
-        <blockquote>"Minhas unhas nunca ficaram tão bonitas. Recomendo!"<span>- Bruna S.</span></blockquote>
-        <blockquote>"Atendimento impecável e ambiente super agradável."<span>- Carla M.</span></blockquote>
-        <blockquote>"Pontualidade e capricho em cada detalhe. Adorei!"<span>- Daniela R.</span></blockquote>
-        <blockquote>"Sempre saio satisfeita, super indico!"<span>- Elisa T.</span></blockquote>
-        <blockquote>"Ótima profissional, muito dedicada."<span>- Fernanda L.</span></blockquote>
-        <blockquote>"Me senti muito bem cuidada, voltarei sempre."<span>- Gabriela F.</span></blockquote>
-        <blockquote>"Unhas lindas e atendimento nota 10!"<span>- Helena V.</span></blockquote>
-        <blockquote>"Ambiente limpo e confortável, amei!"<span>- Isabela D.</span></blockquote>
-        <blockquote>"Sandra tem mãos de fada, recomendo demais!"<span>- Juliana C.</span></blockquote>
-        <blockquote>"Sempre inovando nas decorações, adoro!"<span>- Larissa G.</span></blockquote>
-        <blockquote>"Ótimo preço e serviço de qualidade."<span>- Mariana E.</span></blockquote>
+      <div class="depoimentos-grid" id="depoimentos-grid">
+        <!-- Avaliações serão carregadas via JS -->
       </div>
     </div>
   </section>
@@ -145,26 +123,8 @@
   <!-- Rodapé com contato e redes sociais -->
   <footer>
     <div class="container">
-      <div class="contato">
-        <p><strong>Endereço:</strong> R. José Nucci, 45 - Nova Campinas, Campinas - SP</p>
-        <p><strong>Telefone:</strong> (19) 98831-2466</p>
-        <p><strong>Horário:</strong> Seg-Sáb: 09h às 17h</p>
-      </div>
-
-      <!-- Ícones das redes sociais -->
-      <div class="icones">
-        <a href="https://www.instagram.com/teste----" target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-        </a>
-        <a href="https://www.facebook.com/teste----" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-        </a>
-        <a href="https://www.tiktok.com/@teste----" target="_blank" rel="noopener" aria-label="TikTok">
-          <img src="imagens/tiktok.png" alt="TikTok">
-        </a>
-      </div>
-
-      <!-- Texto de direitos autorais -->
+      <div class="contato" id="contato"></div>
+      <div class="icones" id="icones"></div>
       <p class="final">© 2025 ManiClick</p>
     </div>
   </footer>
@@ -179,7 +139,7 @@
   <script>
     AOS.init();
 
-    // 3. Feedback visual do formulário
+    // Feedback visual do formulário
     document.getElementById('form-agendamento').onsubmit = function(e) {
       e.preventDefault();
       document.getElementById('mensagem-sucesso').style.display = 'block';
@@ -188,10 +148,53 @@
         document.getElementById('form-agendamento').reset();
       }, 3000);
     };
+
+    // Carregar serviços de servicos.json
+    fetch('servicos.json')
+      .then(response => response.json())
+      .then(servicos => {
+        const ul = document.getElementById('lista-servicos');
+        ul.innerHTML = servicos.map(servico =>
+          `<li><strong>${servico.nome}</strong> – ${servico.preco} (${servico.duracao})</li>`
+        ).join('');
+      });
+
+    // Carregar avaliações de avaliações.json
+    fetch('avaliações.json')
+      .then(response => response.json())
+      .then(avaliacoes => {
+        const grid = document.getElementById('depoimentos-grid');
+        grid.innerHTML = avaliacoes.map(avaliacao =>
+          `<blockquote>"${avaliacao.comentario}"<span>- ${avaliacao.cliente}</span></blockquote>`
+        ).join('');
+      });
+
+    // Carregar contato e redes sociais do contato.json
+    fetch('contato.json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('contato').innerHTML = `
+          <p><strong>Endereço:</strong> ${data.endereco}</p>
+          <p><strong>Telefone:</strong> ${data.telefone}</p>
+          <p><strong>Horário:</strong> ${data.horario}</p>
+        `;
+        document.getElementById('icones').innerHTML = `
+          <a href="${data.instagram}" target="_blank" rel="noopener" aria-label="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+          </a>
+          <a href="${data.facebook}" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+          </a>
+          <a href="${data.tiktok}" target="_blank" rel="noopener" aria-label="TikTok">
+            <img src="imagens/tiktok.png" alt="TikTok">
+          </a>
+        `;
+        document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
+      });
   </script>
 
   <!-- Botão flutuante para WhatsApp -->
-  <a href="https://wa.me/SEUNUMERO" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <a id="whatsapp-link" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
 </body>

@@ -28,27 +28,8 @@
     <section class="sobre" id="equipe">
       <div class="container">
         <h2 class="titulo-sessao">Equipe de Desenvolvimento</h2>
-        <div class="equipe-grid">
-          <div class="membro">
-            <img src="imagens/Francisco-rosto.jpg" alt="Francisco Meneguini">
-            <h3>Francisco Meneguini</h3>
-            <p>CP3032051</p>
-          </div>
-          <div class="membro">
-            <img src="imagens\giuliano-foto.png" alt="Giuliano Bengevenga">
-            <h3>Giuliano Bengevenga</h3>
-            <p>CP3031616</p>
-          </div>
-          <div class="membro">
-            <img src="imagens\leandro-foto.jpg" alt="Leandro Zaplana Junior">
-            <h3>Leandro Zaplana Junior</h3>
-            <p>CP3033104</p>
-          </div>
-          <div class="membro">
-            <img src="imagens\maria-foto.jpg" alt="Maria Luiza Coelho">
-            <h3>Maria Luiza Coelho</h3>
-            <p>CP3032043</p>
-          </div>
+        <div class="equipe-grid" id="equipe-grid">
+          <!-- Membros da equipe serão carregados via equipe.json -->
         </div>
         <h2 class="quem-por-tras" style="color: #d63384; margin-top: 32px; font-size: 2em; text-align: center;">Quem Tá Por Trás</h2>
         <p style="max-width: 700px; margin: 8px auto 0 auto; font-size: 1.08em; line-height: 1.4; text-align: center;">
@@ -62,32 +43,56 @@
   </main>
   <footer>
     <div class="container">
-      <div class="contato">
-        <p><strong>Endereço:</strong> R. José Nucci, 45 - Nova Campinas, Campinas - SP</p>
-        <p><strong>Telefone:</strong> (19) 98831-2466</p>
-        <p><strong>Horário:</strong> Seg-Sáb: 09h às 17h</p>
-      </div>
-      <div class="icones">
-        <a href="https://www.instagram.com/teste----" target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-        </a>
-        <a href="https://www.facebook.com/teste----" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-        </a>
-        <a href="https://www.tiktok.com/@teste----" target="_blank" rel="noopener" aria-label="TikTok">
-          <img src="imagens/tiktok.png" alt="TikTok">
-        </a>
-      </div>
+      <div class="contato" id="contato"></div>
+      <div class="icones" id="icones"></div>
       <p class="final">© 2025 ManiClick</p>
     </div>
   </footer>
   <!-- Botão WhatsApp flutuante à direita -->
-  <a href="https://wa.me/5519988312466" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+  <a id="whatsapp-link" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
   <!-- Botão flutuante de voltar ao topo à esquerda, igual ao index.html -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
+  <script>
+    // Carregar equipe de equipe.json
+    fetch('equipe.json')
+      .then(response => response.json())
+      .then(equipe => {
+        const grid = document.getElementById('equipe-grid');
+        grid.innerHTML = equipe.map(membro => `
+          <div class="membro">
+            <img src="${membro.foto}" alt="${membro.nome}">
+            <h3>${membro.nome}</h3>
+            <p>${membro.rm ? membro.rm : ''}</p>
+          </div>
+        `).join('');
+      });
+
+    // Carregar contato e redes sociais do contato.json
+    fetch('contato.json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('contato').innerHTML = `
+          <p><strong>Endereço:</strong> ${data.endereco}</p>
+          <p><strong>Telefone:</strong> ${data.telefone}</p>
+          <p><strong>Horário:</strong> ${data.horario}</p>
+        `;
+        document.getElementById('icones').innerHTML = `
+          <a href="${data.instagram}" target="_blank" rel="noopener" aria-label="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+          </a>
+          <a href="${data.facebook}" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+          </a>
+          <a href="${data.tiktok}" target="_blank" rel="noopener" aria-label="TikTok">
+            <img src="imagens/tiktok.png" alt="TikTok">
+          </a>
+        `;
+        document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
+      });
+  </script>
 </body>
 </html>

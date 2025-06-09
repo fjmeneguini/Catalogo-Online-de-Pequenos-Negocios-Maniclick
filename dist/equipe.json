@@ -1,0 +1,26 @@
+[
+  {
+    "nome": "Francisco Meneguini",
+    "funcao": "Desenvolvedor",
+    "rm": "CP3032051",
+    "foto": "imagens/Francisco-rosto.jpg"
+  },
+  {
+    "nome": "Giuliano Bengevenga",
+    "funcao": "Desenvolvedor",
+    "rm": "CP3031616",
+    "foto": "imagens/giuliano-foto.png"
+  },
+  {
+    "nome": "Leandro Zaplana Junior",
+    "funcao": "Desenvolvedor",
+    "rm": "CP3033104",
+    "foto": "imagens/leandro-foto.jpg"
+  },
+  {
+    "nome": "Maria Luiza Coelho",
+    "funcao": "Desenvolvedora",
+    "rm": "CP3032043",
+    "foto": "imagens/maria-foto.jpg"
+  }
+]

@@ -45,33 +45,43 @@
   </main>
   <footer>
     <div class="container">
-      <div class="contato">
-        <p><strong>Endereço:</strong> R. José Nucci, 45 - Nova Campinas, Campinas - SP</p>
-        <p><strong>Telefone:</strong> (19) 98831-2466</p>
-        <p><strong>Horário:</strong> Seg-Sáb: 09h às 17h</p>
-      </div>
-      <div class="icones">
-        <a href="https://www.instagram.com/teste----" target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-        </a>
-        <a href="https://www.facebook.com/teste----" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-        </a>
-        <a href="https://www.tiktok.com/@teste----" target="_blank" rel="noopener" aria-label="TikTok">
-          <img src="imagens/tiktok.png" alt="TikTok">
-        </a>
-      </div>
+      <div class="contato" id="contato-info"></div>
+      <div class="icones" id="icones"></div>
       <p class="final">© 2025 ManiClick</p>
     </div>
   </footer>
   <!-- Botão WhatsApp flutuante à direita -->
-  <a href="https://wa.me/5519988312466" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+  <a id="whatsapp-link" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
   <!-- Botão flutuante de voltar ao topo à esquerda, igual ao index.html -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
+  <script>
+    // Carregar contato e redes sociais do contato.json
+    fetch('contato.json')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('contato-info').innerHTML = `
+          <p><strong>Endereço:</strong> ${data.endereco}</p>
+          <p><strong>Telefone:</strong> ${data.telefone}</p>
+          <p><strong>Horário:</strong> ${data.horario}</p>
+        `;
+        document.getElementById('icones').innerHTML = `
+          <a href="${data.instagram}" target="_blank" rel="noopener" aria-label="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+          </a>
+          <a href="${data.facebook}" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+          </a>
+          <a href="${data.tiktok}" target="_blank" rel="noopener" aria-label="TikTok">
+            <img src="imagens/tiktok.png" alt="TikTok">
+          </a>
+        `;
+        document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
+      });
+  </script>
   <script src="contatenos.js"></script>
 </body>
 </html>
