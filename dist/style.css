@@ -743,3 +743,35 @@ footer .final {
   box-shadow: none;
   margin: 0;
 }
+
+/* Melhoria: garantir que imagens da galeria tenham altura mínima em telas pequenas */
+@media (max-width: 400px) {
+  .galeria .grid img {
+    height: 60px;
+  }
+}
+
+/* Melhoria: garantir que o botão flutuante não sobreponha o WhatsApp em telas pequenas */
+@media (max-width: 500px) {
+  .topo-float {
+    left: 10px;
+    bottom: 70px;
+  }
+  .whatsapp-float {
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+/* Melhoria: acessibilidade para foco visível em botões e links */
+a:focus, button:focus, .btn:focus, .btn-agendar:focus {
+  outline: 2px solid #d63384;
+  outline-offset: 2px;
+}
+
+/* Melhoria: garantir que o rodapé fique sempre no final da página */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
