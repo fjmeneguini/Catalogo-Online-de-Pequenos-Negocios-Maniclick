@@ -612,6 +612,9 @@ footer .final {
 }
 
 @media (max-width: 600px) {
+  body {
+    padding-top: 90px;
+  }
   .header-container {
     flex-direction: column;
     gap: 10px;
