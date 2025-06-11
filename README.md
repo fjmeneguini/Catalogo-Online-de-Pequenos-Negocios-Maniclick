@@ -39,4 +39,4 @@ O objetivo deste projeto é criar um catálogo online para pequenos negócios, c
 
 ## Contato
 
-Dúvidas ou sugestões? Abra uma issue ou entre em contato diretamente pelo [perfil do GitHub](https://github.com/fjmeneguini).
+Dúvidas ou sugestões? Abra uma issue ou entre em contato diretamente pelo [Perfil: fjmeneguini](https://github.com/fjmeneguini).
