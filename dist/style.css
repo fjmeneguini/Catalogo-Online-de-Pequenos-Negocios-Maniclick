@@ -628,7 +628,7 @@ footer .final {
 }
 @media (max-width: 600px) {
   body {
-    padding-top: 180px; /* ajuste conforme a altura real do header fixo */
+    padding-top: 180px; 
   }
   .header-container {
     flex-direction: column;
@@ -756,7 +756,7 @@ footer .final {
 @media (max-width: 500px) {
   .topo-float {
     left: 10px;
-    bottom: 25px; /* igual ao .whatsapp-float */
+    bottom: 25px; 
   }
   .whatsapp-float {
     right: 10px;

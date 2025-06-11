@@ -93,7 +93,10 @@
       <form id="form-agendamento">
         <input type="text" name="nome" placeholder="Seu nome" required>
         <input type="tel" name="telefone" placeholder="Telefone" required>
-        <input type="date" name="data" id="data" required>
+        <select name="data" id="data" required>
+          <option value="">Selecione a data</option>
+          <!-- Opções de datas serão preenchidas via JS -->
+        </select>
         <select name="hora" id="hora" required>
           <option value="">Selecione o horário</option>
           <!-- Opções serão preenchidas via JS -->
@@ -249,9 +252,28 @@
       "13:00", "14:00", "15:00", "16:00", "17:00"
     ];
 
-    // Atualiza os horários disponíveis ao mudar a data
-    document.getElementById('data').addEventListener('change', function() {
+    // Impede datas anteriores e domingos
+    const dataInput = document.getElementById('data');
+    const hoje = new Date();
+    dataInput.min = hoje.toISOString().split('T')[0];
+
+    dataInput.addEventListener('input', function() {
+      const dataSelecionada = new Date(this.value);
+      // 0 = Domingo
+      if (dataSelecionada.getDay() === 0) {
+        alert('Não é possível agendar aos domingos.');
+        this.value = '';
+      }
+    });
+
+    // Atualiza horários ao mudar a data
+    dataInput.addEventListener('change', function() {
       atualizarHorariosDisponiveis(this.value);
+    });
+
+    // Impede a entrada manual de dados no campo de data
+    document.getElementById('data').addEventListener('keydown', function(e) {
+      e.preventDefault();
     });
 
     function atualizarHorariosDisponiveis(dataSelecionada) {
@@ -267,24 +289,54 @@
           const select = document.getElementById('hora');
           select.innerHTML = '<option value="">Selecione o horário</option>' +
             horariosLivres.map(h => `<option value="${h}">${h}</option>`).join('');
+
+          // Se não houver horários disponíveis, avisa e limpa a data
+          if (horariosLivres.length === 0) {
+            alert('Todos os horários deste dia estão esgotados. Escolha outra data.');
+            dataInput.value = '';
+            select.innerHTML = '<option value="">Selecione o horário</option>';
+          }
         });
     }
+
+    function gerarDatasDisponiveis(qtdDias = 30) {
+      const datas = [];
+      const hoje = new Date();
+      for (let i = 0; i < qtdDias; i++) {
+        const data = new Date(hoje);
+        data.setDate(hoje.getDate() + i);
+        // Só adiciona se não for domingo
+        if (data.getDay() !== 0) {
+          const dataStr = data.toISOString().split('T')[0];
+          datas.push(dataStr);
+        }
+      }
+      return datas;
+    }
+
+    // Preenche o select de datas
+    const dataSelect = document.getElementById('data');
+    function preencherDatas() {
+      const datas = gerarDatasDisponiveis();
+      dataSelect.innerHTML = '<option value="">Selecione a data</option>';
+      datas.forEach(dataStr => {
+        const option = document.createElement('option');
+        option.value = dataStr;
+        option.textContent = dataStr.split('-').reverse().join('/'); // formato dd/mm/aaaa
+        dataSelect.appendChild(option);
+      });
+    }
+    preencherDatas();
+
+    // Atualiza horários ao mudar a data
+    dataSelect.addEventListener('change', function() {
+      atualizarHorariosDisponiveis(this.value);
+    });
   </script>
 
   <!-- Botão flutuante para WhatsApp -->
   <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
-
-  <!-- Regras de segurança do Firestore (para desenvolvimento - liberar acesso total) -->
-  <script>
-    service cloud.firestore {
-      match /databases/{database}/documents {
-        match /{document=**} {
-          allow read, write: if true;
-        }
-      }
-    }
-  </script>
 </body>
 </html>
