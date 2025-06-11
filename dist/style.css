@@ -392,22 +392,18 @@ h2 {
   margin: 0 auto;
 }
 .contato input,
+.contato select,
 .contato button {
   padding: 12px;
   border-radius: 8px;
   border: 1px solid #ddd;
   font-size: 16px;
-}
-.contato button {
-  background: #d63384;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-.contato button:hover {
-  background: #801F4F;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  display: block;
+  background: #fff;
+  color: #333;
 }
 
 /* Destaque para o título da página Contate-nos */
@@ -611,44 +607,46 @@ footer .final {
   }
 }
 
-@media (max-width: 600px) {
-  body {
-    padding-top: 90px;
-  }
+@media (max-width: 700px) {
   .header-container {
     flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
+    align-items: stretch;
+    width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   nav {
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-  }
-  .hero h2 {
-    font-size: 28px;
-  }
-  .hero p {
-    font-size: 16px;
-  }
-  .galeria .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .galeria .grid img {
-    height: 80px;
-  }
-  .servicos ul, .depoimentos blockquote {
-    max-width: 100%;
-  }
-  .contato form {
-    max-width: 100%;
-  }
-  .servicos ul {
-    grid-template-columns: 1fr; 
+    min-width: 0;
+    gap: 10px;
+    word-break: break-word;
   }
 }
-
+@media (max-width: 600px) {
+  body {
+    padding-top: 180px; /* ajuste conforme a altura real do header fixo */
+  }
+  .header-container {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .titulo-sessao {
+    white-space: normal;
+    max-width: 95vw;
+    font-size: 1.3em;
+    padding: 12px 8px;
+  }
+}
 @media (max-width: 1200px) {
   .depoimentos-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -758,11 +756,11 @@ footer .final {
 @media (max-width: 500px) {
   .topo-float {
     left: 10px;
-    bottom: 70px;
+    bottom: 25px; /* igual ao .whatsapp-float */
   }
   .whatsapp-float {
     right: 10px;
-    bottom: 10px;
+    bottom: 25px;
   }
 }
 
@@ -777,4 +775,19 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Campos de data e hora no formulário de contato */
+input[type="date"],
+input[type="time"],
+select[name="hora"] {
+  max-width: 100%;
+  margin: 0;
+  display: block;
+  background: #fff;
+  color: #333;
 }

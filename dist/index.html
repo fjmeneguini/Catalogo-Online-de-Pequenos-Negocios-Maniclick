@@ -90,11 +90,14 @@
   <section class="contato" id="agendar" data-aos="fade-up">
     <div class="container">
       <h2 class="titulo-sessao">Agende seu horário</h2>
-      <form id="form-agendamento" action="mailto:seuemail@exemplo.com" method="POST" enctype="text/plain">
+      <form id="form-agendamento">
         <input type="text" name="nome" placeholder="Seu nome" required>
         <input type="tel" name="telefone" placeholder="Telefone" required>
-        <input type="date" name="data" required>
-        <input type="time" name="hora" required>
+        <input type="date" name="data" id="data" required>
+        <select name="hora" id="hora" required>
+          <option value="">Selecione o horário</option>
+          <!-- Opções serão preenchidas via JS -->
+        </select>
         <button type="submit" class="btn">Enviar</button>
       </form>
       <!-- 3. Feedback visual -->
@@ -146,11 +149,39 @@
     // Feedback visual do formulário
     document.getElementById('form-agendamento').onsubmit = function(e) {
       e.preventDefault();
-      document.getElementById('mensagem-sucesso').style.display = 'block';
-      setTimeout(function() {
-        document.getElementById('mensagem-sucesso').style.display = 'none';
-        document.getElementById('form-agendamento').reset();
-      }, 3000);
+      const nome = this.nome.value;
+      const telefone = this.telefone.value;
+      const data = this.data.value;
+      const hora = this.hora.value;
+
+      // Verifica se o horário ainda está disponível antes de salvar
+      db.collection("agendamentos")
+        .where("data", "==", data)
+        .where("hora", "==", hora)
+        .get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            alert("Esse horário já foi agendado. Por favor, escolha outro.");
+            atualizarHorariosDisponiveis(data); // Atualiza opções
+          } else {
+            db.collection("agendamentos").add({
+              nome,
+              telefone,
+              data,
+              hora,
+              criadoEm: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+              document.getElementById('mensagem-sucesso').style.display = 'block';
+              setTimeout(() => {
+                document.getElementById('mensagem-sucesso').style.display = 'none';
+                document.getElementById('form-agendamento').reset();
+                document.getElementById('hora').innerHTML = '<option value="">Selecione o horário</option>';
+              }, 3000);
+            }).catch(() => {
+              alert('Erro ao enviar agendamento. Tente novamente.');
+            });
+          }
+        });
     };
 
     // Configuração do Firebase
@@ -211,11 +242,49 @@
         document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
       }
     });
+
+    // Horários possíveis de agendamento (de hora em hora)
+    const horariosPossiveis = [
+      "09:00", "10:00", "11:00", "12:00",
+      "13:00", "14:00", "15:00", "16:00", "17:00"
+    ];
+
+    // Atualiza os horários disponíveis ao mudar a data
+    document.getElementById('data').addEventListener('change', function() {
+      atualizarHorariosDisponiveis(this.value);
+    });
+
+    function atualizarHorariosDisponiveis(dataSelecionada) {
+      db.collection("agendamentos")
+        .where("data", "==", dataSelecionada)
+        .get()
+        .then((querySnapshot) => {
+          const horariosAgendados = [];
+          querySnapshot.forEach(doc => {
+            horariosAgendados.push(doc.data().hora);
+          });
+          const horariosLivres = horariosPossiveis.filter(h => !horariosAgendados.includes(h));
+          const select = document.getElementById('hora');
+          select.innerHTML = '<option value="">Selecione o horário</option>' +
+            horariosLivres.map(h => `<option value="${h}">${h}</option>`).join('');
+        });
+    }
   </script>
 
   <!-- Botão flutuante para WhatsApp -->
   <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
+
+  <!-- Regras de segurança do Firestore (para desenvolvimento - liberar acesso total) -->
+  <script>
+    service cloud.firestore {
+      match /databases/{database}/documents {
+        match /{document=**} {
+          allow read, write: if true;
+        }
+      }
+    }
+  </script>
 </body>
 </html>
