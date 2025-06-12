@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipe de Desenvolvimento - ManiClick</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: #FCF0F6;">
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>ManiClick</h1>
+        <span class="subtitulo">Sandra Almeida - Manicure</span>
+      </div>
+      <nav>
+        <a href="index.html#inicio">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="index.html#servicos">Serviços</a>
+        <a href="index.html#avaliacoes">Avaliações</a>
+        <a href="contatenos.html">Contate-nos</a>
+        <a href="desenvolvedores.html">Desenvolvedores</a>
+        <a href="index.html#agendar" class="btn-agendar">Agendar Horário</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="sobre" id="equipe">
+      <div class="container">
+        <h2 class="titulo-sessao">Equipe de Desenvolvimento</h2>
+        <div class="equipe-grid" id="equipe-grid">
+          <!-- Membros da equipe serão carregados via equipe.json -->
+        </div>
+        <h2 class="quem-por-tras" style="color: #d63384; margin-top: 32px; font-size: 2em; text-align: center;">Quem Tá Por Trás</h2>
+        <p style="max-width: 700px; margin: 8px auto 0 auto; font-size: 1.08em; line-height: 1.4; text-align: center;">
+          Esse site foi feito com muito cuidado por uma equipe que curte tecnologia, design e tudo o que envolve criar experiências legais no digital. A gente juntou criatividade, conhecimento e aquela vontade de fazer diferente pra tirar essa ideia do papel.<br>
+          Somos estudantes e desenvolvedores em formação, cheios de vontade de aprender, testar coisas novas e criar soluções que realmente ajudem as pessoas. Cada detalhe aqui do visual até o funcionamento foi pensado pra ser simples, bonito e funcional.<br>
+          Nada de site complicado ou cheio de enrolação. A proposta é trazer praticidade, estilo e deixar tudo com a cara da Sandra e das clientes dela.<br>
+          Esse é só o começo. Vem muito mais por aí! ✨
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="contato" id="contato"></div>
+      <div class="icones" id="icones"></div>
+      <p class="final">© 2025 ManiClick</p>
+    </div>
+  </footer>
+  <!-- Botão WhatsApp flutuante à direita -->
+  <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <img src="imagens/whatsapp.png" alt="WhatsApp">
+  </a>
+  <!-- Botão flutuante de voltar ao topo à esquerda, igual ao index.html -->
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
+    ▲
+  </button>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    // Configuração do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDh8Rm-kx1HNbZewCv5D29EO3SMw_CDjyg",
+      authDomain: "copn---maniclick.firebaseapp.com",
+      projectId: "copn---maniclick",
+      storageBucket: "copn---maniclick.appspot.com",
+      messagingSenderId: "548110366122",
+      appId: "1:548110366122:web:3e61878dd52d8657eda7d3",
+      measurementId: "G-PFDZ47R5B0"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Carregar equipe do Firestore (coleção: equipe), ordenando por nome
+    db.collection("equipe").orderBy("nome").get().then((querySnapshot) => {
+      const grid = document.getElementById('equipe-grid');
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const membro = doc.data();
+        html += `
+          <div class="membro">
+            <img src="${membro.foto}" alt="${membro.nome}">
+            <h3>${membro.nome}</h3>
+            <p>${membro.funcao ? membro.funcao : ''}</p>
+            <p>${membro.rm ? membro.rm : ''}</p>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    });
+
+    // Carregar contato e redes sociais do Firestore (coleção: contato, doc: info)
+    db.collection("contato").doc("info").get().then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        document.getElementById('contato').innerHTML = `
+          <p><strong>Endereço:</strong> ${data.endereco}</p>
+          <p><strong>Telefone:</strong> ${data.telefone}</p>
+          <p><strong>Horário:</strong> ${data.horario}</p>
+        `;
+        document.getElementById('icones').innerHTML = `
+          <a href="${data.instagram}" target="_blank" rel="noopener" aria-label="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+          </a>
+          <a href="${data.facebook}" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+          </a>
+          <a href="${data.tiktok}" target="_blank" rel="noopener" aria-label="TikTok">
+            <img src="imagens/tiktok.png" alt="TikTok">
+          </a>
+        `;
+        document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
+      }
+    });
+  </script>
+</body>
+</html>

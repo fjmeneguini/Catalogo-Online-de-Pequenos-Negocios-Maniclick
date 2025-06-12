@@ -1,0 +1,14 @@
+[
+  {"nome": "Esmaltação simples", "preco": "R$ 20,00", "duracao": "30 min"},
+  {"nome": "Francesinha", "preco": "R$ 25,00", "duracao": "40 min"},
+  {"nome": "Unha decorada", "preco": "R$ 30,00", "duracao": "50 min"},
+  {"nome": "Pé e mão", "preco": "R$ 45,00", "duracao": "1h"},
+  {"nome": "Blindagem de unhas", "preco": "R$ 35,00", "duracao": "50 min"},
+  {"nome": "Unhas em gel", "preco": "R$ 115,00", "duracao": "1h 30min"},
+  {"nome": "Alongamento fibra de vidro", "preco": "R$ 90,00", "duracao": "2h"},
+  {"nome": "Remoção de gel/fibra", "preco": "R$ 30,00", "duracao": "40 min"},
+  {"nome": "Spa dos pés", "preco": "R$ 40,00", "duracao": "50 min"},
+  {"nome": "Hidratação de cutículas", "preco": "R$ 18,00", "duracao": "20 min"},
+  {"nome": "Unhas infantis", "preco": "R$ 15,00", "duracao": "20 min"},
+  {"nome": "Decoração artística", "preco": "R$ 35,00", "duracao": "40 min"}
+]

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ManiClick</title>
+  <!-- SEO básico -->
+  <meta name="description" content="ManiClick - Serviços de manicure, agendamento online e contato fácil. Sandra Almeida, manicure em Campinas.">
+  <meta name="keywords" content="manicure, Campinas, unhas, agendamento, beleza, sandra almeida">
+
+  <!-- Link para o CSS personalizado -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Biblioteca de animações AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+</head>
+<body>
+  <!-- Cabeçalho com logo e navegação -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>ManiClick</h1>
+        <span class="subtitulo">Sandra Almeida - Manicure</span>
+      </div>
+      <nav>
+        <a href="#inicio">Início</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="contatenos.html">Contate-nos</a>
+        <a href="desenvolvedores.html">Desenvolvedores</a>
+        <a href="#agendar" class="btn">Agende seu horário</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção Hero/Bem-vindo -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <h2>Bem-vindo à ManiClick</h2>
+      <p class="subtext">clique abaixo e agende seu horário com Sandra</p>
+      <a href="#agendar" class="btn">Agende seu horário</a>
+    </div>
+  </section>
+
+  <!-- 1. Seção Serviços -->
+  <section class="servicos" id="servicos" data-aos="fade-up">
+    <div class="container">
+      <h2 class="titulo-sessao">Serviços</h2>
+      <ul id="lista-servicos">
+        <!-- Serviços serão carregados via JS -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- Galeria de imagens com alt descritivo -->
+  <section class="galeria" data-aos="fade-up">
+    <div class="container">
+      <h2 class="titulo-sessao">Galeria</h2>
+      <div class="grid">
+        <img src="imagens/Design-de-unha-delicado-com-esmalte-rosa-claro.jpg" alt="Design de unha delicado com esmalte rosa claro">
+        <img src="imagens/Unhas-com-glitter-dourado-brilhante.jpg" alt="Unhas com glitter dourado brilhante">
+        <img src="imagens/Unhas-decoradas-com-francesinha-moderna.jpg" alt="Unhas decoradas com francesinha moderna">
+        <img src="imagens/Design-minimalista-em-branco-e-preto.jpg" alt="Design minimalista em branco e preto">
+        <img src="imagens/Unhas-em-tons-pastel-com-detalhes-florais.jpg" alt="Unhas em tons pastel com detalhes florais">
+        <img src="imagens/Unhas-em-vermelho-classico-com-brilho.jpg" alt="Unhas em vermelho clássico com brilho">
+        <img src="imagens/Unhas-com-decoracao-animal-print.jpg" alt="Unhas com decoração animal print">
+        <img src="imagens/Unhas-francesinha-com-detalhe-dourado.jpeg" alt="Unhas francesinha com detalhe dourado">
+        <img src="imagens/Design-com-pedrarias-e-brilho.jpg" alt="Design com pedrarias e brilho">
+        <img src="imagens/Unhas-com-arte-abstrata-colorida.jpg" alt="Unhas com arte abstrata colorida">
+        <img src="imagens/Unhas-decoradas-com-degrade.jpg" alt="Unhas decoradas com degradê">
+        <img src="imagens/Unhas-com-decoracao-geometrica-colorida.jpg" alt="Unhas com decoração geométrica colorida">
+        <img src="imagens/Unhas-decoradas-com-degrade-ombre-em-tons-de-rosa-e-branco.jpg" alt="Unhas decoradas com degradê ombré em tons de rosa e branco">
+        <img src="imagens/Unhas-decoradas-com-pedras-e-brilho-delicado.jpeg" alt="Unhas decoradas com pedras e brilho delicado">
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Seção Avaliações -->
+  <section class="depoimentos" id="avaliacoes" data-aos="fade-up">
+    <div class="container">
+      <h2 class="titulo-sessao">Avaliações</h2>
+      <div class="depoimentos-grid" id="depoimentos-grid">
+        <!-- Avaliações serão carregadas via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Formulário de Contato/Agendamento -->
+  <section class="contato" id="agendar" data-aos="fade-up">
+    <div class="container">
+      <h2 class="titulo-sessao">Agende seu horário</h2>
+      <form id="form-agendamento">
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <input type="tel" name="telefone" placeholder="Telefone" required>
+        <select name="data" id="data" required>
+          <option value="">Selecione a data</option>
+          <!-- Opções de datas serão preenchidas via JS -->
+        </select>
+        <select name="hora" id="hora" required>
+          <option value="">Selecione o horário</option>
+          <!-- Opções serão preenchidas via JS -->
+        </select>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+      <!-- 3. Feedback visual -->
+      <div id="mensagem-sucesso" style="display:none; color:green; margin-top:10px;">
+        Agendamento enviado com sucesso!
+      </div>
+    </div>
+  </section>
+
+  <!-- Mapa com localização -->
+  <section class="sessao-mapa">
+    <h2 class="titulo-sessao" style="margin-bottom:16px;">Localização</h2>
+    <div class="mapa">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.005552276571!2d-47.050921!3d-22.9016457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8cf461e9be869%3A0x4900574257190a70!2sR.%20Jos%C3%A9%20Nucci%2C%2045%20-%20Nova%20Campinas%2C%20Campinas%20-%20SP%2C%2013025-200!5e0!3m2!1spt-BR!2sbr!4v1717596800000!5m2!1spt-BR!2sbr"
+        width="700"
+        height="400"
+        style="border:0;"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Rodapé com contato e redes sociais -->
+  <footer>
+    <div class="container">
+      <div class="contato" id="contato"></div>
+      <div class="icones" id="icones"></div>
+      <p class="final">© 2025 ManiClick</p>
+    </div>
+  </footer>
+
+  <!-- Botão flutuante de voltar ao topo -->
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
+    ▲
+  </button>
+
+  <!-- Script da biblioteca AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Firebase App (core) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <!-- Firestore -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    AOS.init();
+
+    // Feedback visual do formulário
+    document.getElementById('form-agendamento').onsubmit = function(e) {
+      e.preventDefault();
+      const nome = this.nome.value;
+      const telefone = this.telefone.value;
+      const data = this.data.value;
+      const hora = this.hora.value;
+
+      // Verifica se o horário ainda está disponível antes de salvar
+      db.collection("agendamentos")
+        .where("data", "==", data)
+        .where("hora", "==", hora)
+        .get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            alert("Esse horário já foi agendado. Por favor, escolha outro.");
+            atualizarHorariosDisponiveis(data); // Atualiza opções
+          } else {
+            db.collection("agendamentos").add({
+              nome,
+              telefone,
+              data,
+              hora,
+              criadoEm: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+              document.getElementById('mensagem-sucesso').style.display = 'block';
+              setTimeout(() => {
+                document.getElementById('mensagem-sucesso').style.display = 'none';
+                document.getElementById('form-agendamento').reset();
+                document.getElementById('hora').innerHTML = '<option value="">Selecione o horário</option>';
+              }, 3000);
+            }).catch(() => {
+              alert('Erro ao enviar agendamento. Tente novamente.');
+            });
+          }
+        });
+    };
+
+    // Configuração do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDh8Rm-kx1HNbZewCv5D29EO3SMw_CDjyg",
+      authDomain: "copn---maniclick.firebaseapp.com",
+      projectId: "copn---maniclick",
+      storageBucket: "copn---maniclick.appspot.com",
+      messagingSenderId: "548110366122",
+      appId: "1:548110366122:web:3e61878dd52d8657eda7d3",
+      measurementId: "G-PFDZ47R5B0"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Carregar serviços do Firestore (coleção: servicos)
+    db.collection("servicos").get().then((querySnapshot) => {
+      const ul = document.getElementById('lista-servicos');
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const servico = doc.data();
+        html += `<li><strong>${servico.nome}</strong> – ${servico.preco} (${servico.duracao})</li>`;
+      });
+      ul.innerHTML = html;
+    });
+
+    // Carregar avaliações do Firestore (coleção: avaliacoes)
+    db.collection("avaliacoes").get().then((querySnapshot) => {
+      const grid = document.getElementById('depoimentos-grid');
+      let html = '';
+      querySnapshot.forEach((doc) => {
+        const a = doc.data();
+        html += `<blockquote>"${a.comentario}"<span>- ${a.cliente}</span></blockquote>`;
+      });
+      grid.innerHTML = html;
+    });
+
+    // Carregar contato e redes sociais do Firestore (coleção: contato, doc: info)
+    db.collection("contato").doc("info").get().then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        document.getElementById('contato').innerHTML = `
+          <p><strong>Endereço:</strong> ${data.endereco}</p>
+          <p><strong>Telefone:</strong> ${data.telefone}</p>
+          <p><strong>Horário:</strong> ${data.horario}</p>
+        `;
+        document.getElementById('icones').innerHTML = `
+          <a href="${data.instagram}" target="_blank" rel="noopener" aria-label="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+          </a>
+          <a href="${data.facebook}" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+          </a>
+          <a href="${data.tiktok}" target="_blank" rel="noopener" aria-label="TikTok">
+            <img src="imagens/tiktok.png" alt="TikTok">
+          </a>
+        `;
+        document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
+      }
+    });
+
+    // Horários possíveis de agendamento (de hora em hora)
+    const horariosPossiveis = [
+      "09:00", "10:00", "11:00", "12:00",
+      "13:00", "14:00", "15:00", "16:00", "17:00"
+    ];
+
+    // Impede datas anteriores e domingos
+    const dataInput = document.getElementById('data');
+    const hoje = new Date();
+    dataInput.min = hoje.toISOString().split('T')[0];
+
+    dataInput.addEventListener('input', function() {
+      const dataSelecionada = new Date(this.value);
+      // 0 = Domingo
+      if (dataSelecionada.getDay() === 0) {
+        alert('Não é possível agendar aos domingos.');
+        this.value = '';
+      }
+    });
+
+    // Atualiza horários ao mudar a data
+    dataInput.addEventListener('change', function() {
+      atualizarHorariosDisponiveis(this.value);
+    });
+
+    // Impede a entrada manual de dados no campo de data
+    document.getElementById('data').addEventListener('keydown', function(e) {
+      e.preventDefault();
+    });
+
+    function atualizarHorariosDisponiveis(dataSelecionada) {
+      db.collection("agendamentos")
+        .where("data", "==", dataSelecionada)
+        .get()
+        .then((querySnapshot) => {
+          const horariosAgendados = [];
+          querySnapshot.forEach(doc => {
+            horariosAgendados.push(doc.data().hora);
+          });
+          const horariosLivres = horariosPossiveis.filter(h => !horariosAgendados.includes(h));
+          const select = document.getElementById('hora');
+          select.innerHTML = '<option value="">Selecione o horário</option>' +
+            horariosLivres.map(h => `<option value="${h}">${h}</option>`).join('');
+
+          // Se não houver horários disponíveis, avisa e limpa a data
+          if (horariosLivres.length === 0) {
+            alert('Todos os horários deste dia estão esgotados. Escolha outra data.');
+            dataInput.value = '';
+            select.innerHTML = '<option value="">Selecione o horário</option>';
+          }
+        });
+    }
+
+    function gerarDatasDisponiveis(qtdDias = 30) {
+      const datas = [];
+      const hoje = new Date();
+      for (let i = 0; i < qtdDias; i++) {
+        const data = new Date(hoje);
+        data.setDate(hoje.getDate() + i);
+        // Só adiciona se não for domingo
+        if (data.getDay() !== 0) {
+          const dataStr = data.toISOString().split('T')[0];
+          datas.push(dataStr);
+        }
+      }
+      return datas;
+    }
+
+    // Preenche o select de datas
+    const dataSelect = document.getElementById('data');
+    function preencherDatas() {
+      const datas = gerarDatasDisponiveis();
+      dataSelect.innerHTML = '<option value="">Selecione a data</option>';
+      datas.forEach(dataStr => {
+        const option = document.createElement('option');
+        option.value = dataStr;
+        option.textContent = dataStr.split('-').reverse().join('/'); // formato dd/mm/aaaa
+        dataSelect.appendChild(option);
+      });
+    }
+    preencherDatas();
+
+    // Atualiza horários ao mudar a data
+    dataSelect.addEventListener('change', function() {
+      atualizarHorariosDisponiveis(this.value);
+    });
+  </script>
+
+  <!-- Botão flutuante para WhatsApp -->
+  <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <img src="imagens/whatsapp.png" alt="WhatsApp">
+  </a>
+</body>
+</html>
