@@ -42,4 +42,4 @@ Desenvolver uma plataforma online para divulgação de serviços de manicure, co
 
 ## Contato
 
-Dúvidas ou sugestões? Abra uma issue ou entre em contato diretamente pelo Perfil: [fjmeneguini](https://github.com/fjmeneguini).
+Dúvidas ou sugestões? Abra uma issue ou entre em contato diretamente pelo perfil: [fjmeneguini](https://github.com/fjmeneguini).
