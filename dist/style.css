@@ -590,6 +590,46 @@ footer .final {
   object-fit: cover;
 }
 
+/* Menu principal com submenu */
+.menu-principal {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  position: relative;
+}
+.menu-principal > li {
+  position: relative;
+}
+.submenu-lista {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  z-index: 10;
+  min-width: 220px;
+}
+.submenu-servicos:hover .submenu-lista,
+.submenu-servicos:focus-within .submenu-lista {
+  display: block;
+}
+.submenu-lista li {
+  padding: 0;
+}
+.submenu-lista a {
+  display: block;
+  padding: 12px 20px;
+  color: #d63384;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.submenu-lista a:hover {
+  background: #fcf0f6;
+}
+
 /* Responsivo */
 @media (max-width: 900px) {
   .galeria .grid {
@@ -626,6 +666,28 @@ footer .final {
     min-width: 0;
     gap: 10px;
     word-break: break-word;
+  }
+  .menu-principal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px 10px;           /* Menor espaço entre itens */
+    padding: 0 2vw;
+  }
+  .menu-principal > li {
+    flex: 0 1 auto;
+    min-width: 90px;         /* Mantém os itens inteiros */
+    font-size: 0.97rem;      /* Fonte um pouco menor */
+    text-align: center;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0 2px;
+  }
+  .btn-agendar {
+    font-size: 0.97rem;
+    padding: 8px 10px;
+    margin: 0;
   }
 }
 @media (max-width: 600px) {
@@ -792,4 +854,48 @@ select[name="hora"] {
   display: block;
   background: #fff;
   color: #333;
+}
+
+/* Estilo da página de serviço */
+.pagina-servico {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(214,51,132,0.08);
+}
+.servico-destaque {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.servico-foto-grande {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.servico-descricao {
+  flex: 1;
+}
+.servico-galeria h2 {
+  margin-bottom: 16px;
+  color: #d63384;
+}
+.servico-fotos {
+  display: flex;
+  gap: 16px;
+  justify-content: center; /* Centraliza horizontalmente */
+  flex-wrap: wrap;
+}
+.servico-fotos img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }

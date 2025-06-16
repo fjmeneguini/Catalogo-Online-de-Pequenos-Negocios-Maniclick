@@ -1,20 +1,22 @@
-<!-- (faleconosco.html) -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contate-nos - ManiClick</title>
+  <title>Esmaltação Simples | ManiClick</title>
+  <meta name="description" content="Beleza prática com acabamento impecável.
+
+">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <header>
+  <!-- Cabeçalho com navegação -->
+  <header>
     <div class="header-container">
       <div class="logo">
         <h1>ManiClick</h1>
         <span class="subtitulo">Sandra Almeida - Manicure</span>
       </div>
-      <!-- Exemplo de menu com submenu de serviços e botão de agendamento -->
       <nav>
         <ul class="menu-principal">
           <li><a href="index.html">Início</a></li>
@@ -44,42 +46,48 @@
       </nav>
     </div>
   </header>
-  <main>
-    <section class="contato" id="contato">
-      <div class="container">
-        <h2 class="titulo-contatenos">Contate-nos</h2>
-        <form id="form-contatenos" action="https://formsubmit.co/sandraalmeidamanicure@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Nova mensagem do site ManiClick">
-          <input type="hidden" name="_replyto" value="">
-          <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" required>
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" required>
-          <label for="mensagem">Mensagem:</label>
-          <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
-          <button type="submit" class="btn">Enviar</button>
-        </form>
+
+  <main class="pagina-servico">
+    <section class="servico-destaque">
+      <img src="imagens/esmaltacao-simples-0.jpg" alt="Esmaltação Simples" class="servico-foto-grande">
+      <div class="servico-descricao">
+        <h1>Esmaltação Simples</h1>
+        <p>
+          A esmaltação simples realça a beleza natural das unhas com cores vibrantes e acabamento profissional. Utilizamos esmaltes de qualidade e técnicas cuidadosas para garantir durabilidade, brilho e um visual elegante no dia a dia. Ideal para quem busca praticidade sem abrir mão do estilo.
+        </p>
+      </div>
+    </section>
+    <section class="servico-galeria">
+      <h2>Exemplos de Esmaltação Simples</h2>
+      <div class="servico-fotos">
+        <img src="imagens/esmaltacao-simples-1.jpg" alt="Exemplo 1 de Esmaltação Simples">
+        <img src="imagens/esmaltacao-simples-2.jpg" alt="Exemplo 2 de Esmaltação Simples">
+        <img src="imagens/esmaltacao-simples-3.jpg" alt="Exemplo 3 de Esmaltação Simples">
       </div>
     </section>
   </main>
+
+  <!-- Rodapé padrão -->
   <footer>
     <div class="container">
-      <div class="contato" id="contato-info"></div>
+      <div class="contato" id="contato"></div>
       <div class="icones" id="icones"></div>
       <p class="final">© 2025 ManiClick</p>
     </div>
   </footer>
-  <!-- Botão WhatsApp flutuante à direita -->
+
+  <!-- Botão flutuante de WhatsApp -->
   <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
-  <!-- Botão flutuante de voltar ao topo à esquerda, igual ao index.html -->
+
+  <!-- Botão flutuante de voltar ao topo -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
-  <!-- Firebase App (core) -->
+
+  <!-- Firebase e scripts para contato/redes sociais -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-  <!-- Firestore -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script>
     // Configuração do Firebase
@@ -99,7 +107,7 @@
     db.collection("contato").doc("info").get().then((doc) => {
       if (doc.exists) {
         const data = doc.data();
-        document.getElementById('contato-info').innerHTML = `
+        document.getElementById('contato').innerHTML = `
           <p><strong>Endereço:</strong> ${data.endereco}</p>
           <p><strong>Telefone:</strong> ${data.telefone}</p>
           <p><strong>Horário:</strong> ${data.horario}</p>
@@ -119,6 +127,5 @@
       }
     });
   </script>
-  <script src="contatenos.js"></script>
 </body>
 </html>
