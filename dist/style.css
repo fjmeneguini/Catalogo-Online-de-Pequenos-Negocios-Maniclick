@@ -44,7 +44,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-top: 60px; 
+  padding-top: 0;
+  overflow-x: hidden;
 }
 
 html, body {
@@ -157,6 +158,7 @@ nav a:hover {
 .hero > * {
   position: relative;
   z-index: 1;
+  padding-top: 64px; /* ajuste conforme a altura real do header fixo */
 }
 
 .hero h2 {
@@ -630,6 +632,180 @@ footer .final {
   background: #fcf0f6;
 }
 
+/* Menu hamburguer só no mobile */
+.menu-hamburguer {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+  z-index: 1101;
+}
+.menu-hamburguer span {
+  display: block;
+  height: 4px;
+  width: 28px;
+  margin: 4px 0;
+  background: var(--rosa);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Menu mobile */
+.menu-mobile {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(216,27,96,0.10);
+  border-radius: 0 0 18px 18px;
+  z-index: 1200;
+  animation: fadeInMenu 0.2s;
+  padding-top: 70px;
+}
+@keyframes fadeInMenu {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.menu-mobile ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.menu-mobile a {
+  color: var(--rosa);
+  text-decoration: none;
+  font-size: 1.15em;
+  padding: 12px 36px;
+  border-radius: 24px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  background: var(--rosa-claro);
+  margin-bottom: 2px;
+}
+.menu-mobile a:hover,
+.menu-mobile .btn-agendar {
+  background: var(--rosa);
+  color: #fff;
+  box-shadow: 0 2px 8px #d81b6022;
+}
+
+/* Balões do menu mobile com largura igual ao maior */
+.menu-mobile ul {
+  width: 100%;
+  align-items: center;
+}
+.menu-mobile ul > li {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.menu-mobile a,
+.menu-mobile .btn-agendar {
+  width: 90vw;
+  max-width: 340px;
+  min-width: 220px;
+  box-sizing: border-box;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+.menu-mobile .submenu-lista {
+  width: 90vw;
+  max-width: 340px;
+  min-width: 220px;
+  margin: 0 auto 8px auto;
+}
+.menu-mobile .submenu-lista li {
+  width: 100%;
+}
+.menu-mobile .submenu-lista a {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  background: none;
+  color: var(--rosa-escuro);
+  padding: 8px 24px;
+  border-radius: 12px;
+  font-size: 1em;
+}
+.menu-mobile .submenu-lista a:hover {
+  background: var(--rosa);
+  color: #fff;
+}
+
+/* Botão fechar menu */
+.fechar-menu {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 2.2em;
+  color: var(--rosa);
+  cursor: pointer;
+  z-index: 1300;
+  line-height: 1;
+}
+
+/* MOBILE: Botão hamburguer totalmente à direita */
+@media (max-width: 900px) {
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    padding-left: 16px;
+    padding-right: 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .logo {
+    flex: 0 1 auto;
+    z-index: 2;
+  }
+  .menu-hamburguer {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    z-index: 3;
+    display: flex;
+  }
+}
+
+/* Só mostra no mobile */
+@media (max-width: 900px) {
+  .menu-hamburguer {
+    display: flex;
+  }
+  .menu-mobile.ativo {
+    display: flex;
+  }
+  nav > ul.menu-principal {
+    display: none !important;
+  }
+}
+@media (min-width: 901px) {
+  .menu-hamburguer,
+  .menu-mobile {
+    display: none !important;
+  }
+}
+
 /* Responsivo */
 @media (max-width: 900px) {
   .galeria .grid {
@@ -647,17 +823,29 @@ footer .final {
   .servicos ul {
     grid-template-columns: repeat(2, 1fr); 
   }
+  .logo .subtitulo {
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
+  }
 }
 
 @media (max-width: 700px) {
   .header-container {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     min-width: 0;
     box-sizing: border-box;
     padding-left: 10px;
     padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    gap: 0;
   }
   nav {
     flex-wrap: wrap;
@@ -672,13 +860,13 @@ footer .final {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 6px 10px;           /* Menor espaço entre itens */
+    gap: 6px 10px;
     padding: 0 2vw;
   }
   .menu-principal > li {
     flex: 0 1 auto;
-    min-width: 90px;         /* Mantém os itens inteiros */
-    font-size: 0.97rem;      /* Fonte um pouco menor */
+    min-width: 90px;
+    font-size: 0.97rem;
     text-align: center;
     white-space: nowrap;
     margin: 0;
@@ -691,24 +879,37 @@ footer .final {
   }
 }
 @media (max-width: 600px) {
-  body {
-    padding-top: 180px; 
-  }
   .header-container {
-    flex-direction: column;
-    gap: 10px;
-    align-items: stretch;
-    width: 100vw;
-    min-width: 0;
-    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
     padding-top: 20px;
     padding-bottom: 20px;
   }
-  .titulo-sessao {
-    white-space: normal;
-    max-width: 95vw;
-    font-size: 1.3em;
-    padding: 12px 8px;
+  .hero {
+    padding-top: 54px !important;
+    padding-bottom: 40px !important;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero > * {
+    padding-top: 0 !important;
+  }
+  main,
+  .sobre,
+  .contato,
+  #equipe,
+  .galeria,
+  .depoimentos,
+  .sessao-mapa {
+    padding-top: 54px !important;
+    padding-bottom: 30px !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
   }
 }
 @media (max-width: 1200px) {
@@ -841,61 +1042,244 @@ body {
   flex-direction: column;
 }
 
-body {
-  overflow-x: hidden;
-}
+/* --- SUBMENU MOBILE: CORREÇÃO FINAL E REMOÇÃO DE CONFLITOS --- */
 
-/* Campos de data e hora no formulário de contato */
-input[type="date"],
-input[type="time"],
-select[name="hora"] {
-  max-width: 100%;
-  margin: 0;
-  display: block;
-  background: #fff;
-  color: #333;
-}
-
-/* Estilo da página de serviço */
-.pagina-servico {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 24px;
-  background: #fff;
+/* Submenu mobile fechado por padrão */
+.menu-mobile .submenu-servicos .submenu-lista {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(.4,0,.2,1), opacity 0.3s;
+  padding: 0 !important;
+  opacity: 0;
+  pointer-events: none;
   border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(214,51,132,0.08);
 }
+
+/* Submenu mobile aberto */
+.menu-mobile .submenu-servicos.ativo > .submenu-lista {
+  display: flex;
+  flex-direction: column;
+  max-height: 50vh;
+  overflow-y: auto;
+  opacity: 1;
+  pointer-events: auto;
+  padding: 16px 0 8px 0;
+}
+
+/* Ajuste para o balão de serviços não ficar torto */
+.menu-mobile .submenu-servicos {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.pagina-servico {
+  background: #fff;
+  padding: 120px 0 40px 0;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 100px; /* aumenta o espaço para o rodapé */
+}
+
 .servico-destaque {
   display: flex;
-  gap: 32px;
+  flex-direction: row;
   align-items: center;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto 40px auto;
+  background: #FCF0F6;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(214,51,132,0.06);
+  padding: 36px 32px;
+  width: 90vw;
 }
+
 .servico-foto-grande {
   width: 320px;
   height: 320px;
   object-fit: cover;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(214,51,132,0.10);
+  background: #fff;
 }
+
 .servico-descricao {
   flex: 1;
+  min-width: 220px;
 }
-.servico-galeria h2 {
-  margin-bottom: 16px;
+
+.servico-descricao h1 {
   color: #d63384;
+  font-size: 2.2em;
+  margin-bottom: 12px;
+  margin-top: 0;
 }
+
+.servico-descricao p {
+  font-size: 1.18em;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.servico-galeria {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 90vw;
+  background: #FCF0F6;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(214,51,132,0.06);
+  padding: 32px 32px 24px 32px;
+  margin-top: 0;
+}
+
+.servico-galeria h2 {
+  color: #d63384;
+  font-size: 1.5em;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
 .servico-fotos {
   display: flex;
-  gap: 16px;
-  justify-content: center; /* Centraliza horizontalmente */
+  flex-direction: row;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 }
+
 .servico-fotos img {
   width: 180px;
   height: 180px;
   object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(214,51,132,0.10);
+  background: #fff;
+  transition: transform 0.18s;
+}
+.servico-fotos img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 16px rgba(214,51,132,0.18);
+}
+
+/* Responsivo para páginas de serviço */
+@media (max-width: 900px) {
+  .pagina-servico {
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+  .servico-destaque {
+    flex-direction: column;
+    gap: 24px;
+    padding: 28px 10px;
+    width: 98vw;
+  }
+  .servico-foto-grande {
+    width: 220px;
+    height: 220px;
+  }
+  .servico-galeria {
+    padding: 20px 8px 16px 8px;
+    width: 98vw;
+  }
+  .servico-fotos img {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pagina-servico {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+  .servico-destaque {
+    padding: 14px 2vw;
+    gap: 12px;
+  }
+  .servico-foto-grande {
+    width: 90vw;
+    max-width: 180px;
+    height: 90vw;
+    max-height: 180px;
+  }
+  .servico-galeria {
+    padding: 10px 2vw 10px 2vw;
+  }
+  .servico-fotos {
+    gap: 10px;
+  }
+  .servico-fotos img {
+    width: 70px;
+    height: 70px;
+  }
+}
+main,
+.sobre,
+.contato,
+#equipe {
+  padding-top: 80px;
+}
+
+@media (max-width: 900px) {
+  main,
+  .sobre,
+  .contato,
+  #equipe {
+    padding-top: 68px !important;
+  }
+}
+@media (max-width: 600px) {
+  .pagina-servico {
+    padding-top: 54px !important;
+    padding-bottom: 30px !important;
+    min-height: unset !important;
+    background: #fff;
+  }
+  main,
+  .sobre,
+  .contato,
+  #equipe,
+  .galeria,
+  .depoimentos,
+  .sessao-mapa {
+    padding-top: 54px !important;
+    padding-bottom: 30px !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+  }
+  footer {
+    margin-top: 0 !important;
+  }
+}
+@media (max-width: 600px) {
+  .titulo-sessao {
+    white-space: normal !important;
+    word-break: break-word !important;
+    font-size: 1.3em !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    max-width: 95vw !important;
+    box-sizing: border-box;
+  }
+}
+@media (max-width: 600px) {
+  html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  }
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+.btn:focus:not(:focus-visible),
+.btn-agendar:focus:not(:focus-visible),
+img:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
 }

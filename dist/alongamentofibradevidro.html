@@ -15,6 +15,41 @@
         <h1>ManiClick</h1>
         <span class="subtitulo">Sandra Almeida - Manicure</span>
       </div>
+      <!-- Menu hamburguer mobile -->
+      <button class="menu-hamburguer" id="menu-hamburguer" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="menu-mobile" id="menu-mobile">
+        <button class="fechar-menu" id="fechar-menu" aria-label="Fechar menu">&times;</button>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li class="submenu-servicos">
+            <a href="#" id="abrir-submenu-mobile">Serviços &#9662;</a>
+            <ul class="submenu-lista">
+              <li><a href="alongamentofibradevidro.html">Alongamento Fibra de Vidro</a></li>
+              <li><a href="blindagemdeunhas.html">Blindagem de Unhas</a></li>
+              <li><a href="decoracaoartistica.html">Decoração Artística</a></li>
+              <li><a href="esmaltacaosimples.html">Esmaltação Simples</a></li>
+              <li><a href="francesinha.html">Francesinha</a></li>
+              <li><a href="hidratacaodecuticulas.html">Hidratação de Cutículas</a></li>
+              <li><a href="peemao.html">Pé e Mão</a></li>
+              <li><a href="remocaodegelfibra.html">Remoção de Gel/Fibra</a></li>
+              <li><a href="spadospes.html">Spa dos Pés</a></li>
+              <li><a href="unhadecorada.html">Unha Decorada</a></li>
+              <li><a href="unhasemgel.html">Unhas em Gel</a></li>
+              <li><a href="unhasinfantis.html">Unhas Infantis</a></li>
+            </ul>
+          </li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="index.html#avaliacoes">Avaliações</a></li>
+          <li><a href="contatenos.html">Contate-nos</a></li>
+          <li><a href="desenvolvedores.html">Desenvolvedores</a></li>
+          <li><a href="index.html#agendar" class="btn-agendar">Agende seu horário</a></li>
+        </ul>
+      </nav>
+      <!-- Menu desktop -->
       <nav>
         <ul class="menu-principal">
           <li><a href="index.html">Início</a></li>
@@ -123,6 +158,39 @@
         `;
         document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
       }
+    });
+
+    // --- MOBILE MENU SCRIPTS PADRONIZADOS ---
+    // Menu hamburguer mobile
+    const btnHamburguer = document.getElementById('menu-hamburguer');
+    const menuMobile = document.getElementById('menu-mobile');
+    const btnFechar = document.getElementById('fechar-menu');
+    btnHamburguer.addEventListener('click', () => {
+      menuMobile.classList.add('ativo');
+    });
+    btnFechar.addEventListener('click', () => {
+      menuMobile.classList.remove('ativo');
+      // Fecha também o submenu se estiver aberto
+      const submenuServicos = document.querySelector('.menu-mobile .submenu-servicos');
+      if (submenuServicos) submenuServicos.classList.remove('ativo');
+    });
+
+    // Submenu mobile de serviços
+    const abrirSubmenuMobile = document.getElementById('abrir-submenu-mobile');
+    const submenuServicos = abrirSubmenuMobile.parentElement;
+
+    abrirSubmenuMobile.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Alterna abrir/fechar apenas este submenu
+      submenuServicos.classList.toggle('ativo');
+    });
+
+    // Impede que clique nos links do submenu mobile feche o menu
+    const linksSubmenuMobile = document.querySelectorAll('.menu-mobile .submenu-lista a');
+    linksSubmenuMobile.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
     });
   </script>
 </body>
