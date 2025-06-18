@@ -1283,3 +1283,220 @@ img:focus:not(:focus-visible) {
   outline: none !important;
   box-shadow: none !important;
 }
+.pagina-servico {
+  /* ...outros estilos... */
+  padding-bottom: 180px !important; /* Espaço suficiente para o rodapé */
+}
+@media (max-width: 900px) {
+  .pagina-servico {
+    padding-bottom: 160px !important;
+  }
+}
+@media (max-width: 600px) {
+  .pagina-servico {
+    padding-bottom: 120px !important;
+  }
+}
+@media (max-width: 600px) {
+  body {
+    display: block !important;
+    flex-direction: unset !important;
+    min-height: unset !important;
+  }
+}
+@media (max-width: 600px) {
+  .topo-float {
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+    position: fixed !important;
+    left: 10px !important;
+    bottom: 25px !important;
+    display: flex !important;
+  }
+}
+
+/* Estilo especial para o card de agendamento */
+.agendar-card {
+  background: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(214,51,132,0.10);
+  padding: 32px 24px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #fcf0f6;
+}
+
+.agendar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.agendar-icone {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 8px #d6338422);
+}
+
+.agendar-header h2 {
+  color: #d63384;
+  font-size: 2em;
+  margin: 0 0 4px 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.agendar-sub {
+  color: #801F4F;
+  font-size: 1.1em;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.agendar-card form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agendar-card input,
+.agendar-card select {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1.5px solid #e05297;
+  font-size: 1em;
+  background: #fcf0f6;
+  color: #555;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.agendar-card input:focus,
+.agendar-card select:focus {
+  border: 1.5px solid #d63384;
+  background: #fff;
+}
+
+.btn-agendar-form {
+  background: #d63384 !important;
+  color: #fff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 0;
+  font-size: 1.1em;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px #d6338422;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-agendar-form:hover {
+  background: #801F4F !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px #d6338444;
+}
+/* Responsivo */
+@media (max-width: 600px) {
+  .agendar-card {
+    max-width: 98vw;
+    padding: 18px 4vw 18px 4vw;
+  }
+  .agendar-header h2 {
+    font-size: 1.3em;
+  }
+}
+/* Estilo especial para o card de contato */
+.contato-card {
+  background: #fff;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(214,51,132,0.10);
+  padding: 32px 24px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #fcf0f6;
+}
+
+.contato-card h2 {
+  color: #d63384;
+  font-size: 2em;
+  margin: 0 0 16px 0;
+  font-weight: bold;
+  text-align: center;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.contato-card form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contato-card label {
+  color: #801F4F;
+  font-weight: 500;
+  margin-bottom: 2px;
+  margin-top: 8px;
+}
+
+.contato-card input,
+.contato-card textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1.5px solid #e05297;
+  font-size: 1em;
+  background: #fcf0f6;
+  color: #555;
+  outline: none;
+  transition: border 0.2s;
+  resize: none;
+}
+
+.contato-card input:focus,
+.contato-card textarea:focus {
+  border: 1.5px solid #d63384;
+  background: #fff;
+}
+
+.contato-card button.btn {
+  background: #d63384 !important;
+  color: #fff !important;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 0;
+  font-size: 1.1em;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px #d6338422;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.contato-card button.btn:hover {
+  background: #801F4F !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px #d6338444;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .contato-card {
+    max-width: 98vw;
+    padding: 18px 4vw 18px 4vw;
+  }
+  .contato-card h2 {
+    font-size: 1.3em;
+  }
+}

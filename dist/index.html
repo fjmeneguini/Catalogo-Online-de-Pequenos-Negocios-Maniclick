@@ -130,22 +130,28 @@
   </section>
 
   <section class="contato" id="agendar" data-aos="fade-up">
-    <div class="container">
-      <h2 class="titulo-sessao">Agende seu horário</h2>
+    <div class="agendar-card">
+      <div class="agendar-header">
+        <img src="imagens/calendario.svg" alt="Calendário" class="agendar-icone">
+        <h2>Agende seu horário</h2>
+        <p class="agendar-sub">Escolha o melhor dia e horário para você!</p>
+      </div>
       <form id="form-agendamento">
         <input type="text" name="nome" placeholder="Seu nome" required>
-        <input type="tel" name="telefone" placeholder="Telefone" required>
+        <input type="tel" name="telefone" placeholder="Telefone/WhatsApp" required>
         <select name="data" id="data" required>
           <option value="">Selecione a data</option>
+          <!-- opções geradas via JS -->
         </select>
         <select name="hora" id="hora" required>
           <option value="">Selecione o horário</option>
+          <!-- opções geradas via JS -->
         </select>
-        <button type="submit" class="btn">Enviar</button>
+        <button type="submit" class="btn btn-agendar-form">Agendar agora</button>
+        <div id="mensagem-sucesso" style="display:none;color:var(--verde);margin-top:10px;text-align:center;">
+          Agendamento realizado com sucesso!
+        </div>
       </form>
-      <div id="mensagem-sucesso" style="display:none; color:green; margin-top:10px;">
-        Agendamento enviado com sucesso!
-      </div>
     </div>
   </section>
 
