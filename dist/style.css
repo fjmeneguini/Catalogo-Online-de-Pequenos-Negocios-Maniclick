@@ -1,20 +1,6 @@
-/* Paleta de Cores do Projeto
--------------------------------------------------
---rosa:           #d63384      (rosa principal: botões, títulos, rodapé)
---rosa-escuro:    #801F4F      (rosa escuro: hover, detalhes)
---rosa-medio:     #e05297      (rosa médio: cards de serviço, bordas)
---rosa-claro:     #FCF0F6      (rosa claro: fundo das sessões principais)
---rosa-claro-alt: #ffe3f0      (rosa claro alternativo: balõezinhos depoimentos)
---rosa-borda:     #E066A3      (rosa borda: mapa)
---roxo-claro:     #f3eaff      (roxo claro: balõezinhos depoimentos)
---roxo:           #a16ae8      (roxo: borda balõezinhos depoimentos)
---verde-claro:    #eafff3      (verde claro: balõezinhos depoimentos)
---verde:          #2ecc71      (verde: borda balõezinhos depoimentos)
---cinza-texto:    #555         (texto secundário)
---cinza-claro:    #ccc         (detalhes, placeholder)
---branco:         #fff         (fundos, textos, sessões brancas)
--------------------------------------------------
-*/
+/* ============================================================
+   PALETA DE CORES DO PROJETO
+   ============================================================ */
 :root {
   --rosa: #d63384;
   --rosa-escuro: #801F4F;
@@ -34,8 +20,9 @@
   --z-header: 100;
   --z-float: 200;
 }
-
-/* Estilização base */
+/* ============================================================
+   RESET E BASE
+   ============================================================ */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -158,7 +145,7 @@ nav a:hover {
 .hero > * {
   position: relative;
   z-index: 1;
-  padding-top: 64px; /* ajuste conforme a altura real do header fixo */
+  padding-top: 64px; 
 }
 
 .hero h2 {
@@ -259,7 +246,7 @@ h2 {
 }
 .galeria .grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* Sempre 7 colunas */
+  grid-template-columns: repeat(7, 1fr); 
   gap: 16px;
   justify-items: center;
   align-items: center;
@@ -443,7 +430,7 @@ h2 {
   white-space: nowrap;
 }
 
-/* Corrige o retângulo do título só na página de desenvolvedores */
+
 #equipe .titulo-sessao {
   display: inline-block;
   white-space: normal;
@@ -1010,14 +997,14 @@ footer .final {
   margin: 0;
 }
 
-/* Melhoria: garantir que imagens da galeria tenham altura mínima em telas pequenas */
+
 @media (max-width: 400px) {
   .galeria .grid img {
     height: 60px;
   }
 }
 
-/* Melhoria: garantir que o botão flutuante não sobreponha o WhatsApp em telas pequenas */
+
 @media (max-width: 500px) {
   .topo-float {
     left: 10px;
@@ -1029,20 +1016,20 @@ footer .final {
   }
 }
 
-/* Melhoria: acessibilidade para foco visível em botões e links */
+
 a:focus, button:focus, .btn:focus, .btn-agendar:focus {
   outline: 2px solid #d63384;
   outline-offset: 2px;
 }
 
-/* Melhoria: garantir que o rodapé fique sempre no final da página */
+
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* --- SUBMENU MOBILE: CORREÇÃO FINAL E REMOÇÃO DE CONFLITOS --- */
+
 
 /* Submenu mobile fechado por padrão */
 .menu-mobile .submenu-servicos .submenu-lista {
@@ -1067,7 +1054,7 @@ body {
   padding: 16px 0 8px 0;
 }
 
-/* Ajuste para o balão de serviços não ficar torto */
+
 .menu-mobile .submenu-servicos {
   display: flex;
   flex-direction: column;
@@ -1080,7 +1067,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 100px; /* aumenta o espaço para o rodapé */
+  padding-bottom: 100px;
 }
 
 .servico-destaque {
@@ -1284,8 +1271,7 @@ img:focus:not(:focus-visible) {
   box-shadow: none !important;
 }
 .pagina-servico {
-  /* ...outros estilos... */
-  padding-bottom: 180px !important; /* Espaço suficiente para o rodapé */
+  padding-bottom: 180px !important;
 }
 @media (max-width: 900px) {
   .pagina-servico {
@@ -1500,11 +1486,11 @@ img:focus:not(:focus-visible) {
     font-size: 1.3em;
   }
 }
-/* Imagens maiores e mais próximas no desktop */
+
 .servico-fotos {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
-  gap: 8px !important; /* Menor distância entre as imagens */
+  gap: 8px !important; 
   justify-items: center;
   align-items: center;
   width: 100%;
@@ -1522,7 +1508,7 @@ img:focus:not(:focus-visible) {
   background: #fff;
   transition: transform 0.18s;
 }
-/* Remove flex-wrap e gap antigos se houver */
+
 @media (max-width: 900px), (max-width: 600px) {
   .servico-fotos {
     grid-template-columns: repeat(3, 1fr) !important;
@@ -1679,7 +1665,7 @@ img:focus:not(:focus-visible) {
   letter-spacing: 0.5px !important;
 }
 
-/* Galeria de imagens: sempre 3 lado a lado, centralizadas, responsivas */
+
 .servico-fotos {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
@@ -2022,26 +2008,23 @@ img:focus:not(:focus-visible) {
 
 /* Aumenta o espaçamento entre os cards dos desenvolvedores */
 .equipe-grid {
-  gap: 44px 40px; /* mais espaço entre linhas e colunas */
+  gap: 44px 40px; 
   margin: 48px 0 32px 0;
 }
-/* Linha decorativa do título da sessão SOBRE */
 .sobre .titulo-sessao::after {
   content: "";
   display: block;
-  width: 70%; /* agora acompanha o texto */
+  width: 70%; 
   max-width: 340px;
   height: 4px;
   background: linear-gradient(90deg, #d63384 60%, #e05297 100%);
   border-radius: 2px;
   margin: 14px auto 0 auto;
 }
-
-/* Linha decorativa do título da sessão EQUIPE */
 .sobre#equipe .titulo-sessao::after {
   content: "";
   display: block;
-  width: 70%; /* agora acompanha o texto */
+  width: 70%; 
   max-width: 340px;
   height: 4px;
   background: linear-gradient(90deg, #d63384 60%, #e05297 100%);
