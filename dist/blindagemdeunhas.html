@@ -1,3 +1,6 @@
+<!-- ============================================================
+     PÁGINA DE SERVIÇO - BLINDAGEM DE UNHAS | ManiClick
+     ============================================================ -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,7 +11,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Cabeçalho com navegação -->
+  <!-- ============================================================
+       CABEÇALHO E NAVEGAÇÃO
+       ============================================================
+       Inclui logotipo, menus de navegação (desktop e mobile) e botão de agendamento.
+       ============================================================ -->
   <header>
     <div class="header-container">
       <div class="logo">
@@ -21,6 +28,7 @@
         <span></span>
         <span></span>
       </button>
+      <!-- Menu mobile -->
       <nav class="menu-mobile" id="menu-mobile">
         <button class="fechar-menu" id="fechar-menu" aria-label="Fechar menu">&times;</button>
         <ul>
@@ -80,6 +88,11 @@
     </div>
   </header>
 
+  <!-- ============================================================
+       CONTEÚDO PRINCIPAL DO SERVIÇO
+       ============================================================
+       Apresenta o serviço, descrição e galeria de exemplos.
+       ============================================================ -->
   <main class="pagina-servico">
     <section class="servico-destaque">
       <img src="imagens/blindagem-de-unhas-0.jpg" alt="Blindagem de unhas" class="servico-foto-grande">
@@ -100,7 +113,11 @@
     </section>
   </main>
 
-  <!-- Rodapé padrão -->
+  <!-- ============================================================
+       RODAPÉ PADRÃO
+       ============================================================
+       Exibe informações de contato, redes sociais e direitos autorais.
+       ============================================================ -->
   <footer>
     <div class="container">
       <div class="contato" id="contato"></div>
@@ -109,17 +126,23 @@
     </div>
   </footer>
 
-  <!-- Botão flutuante de WhatsApp -->
+  <!-- ============================================================
+       BOTÕES FLUTUANTES
+       ============================================================
+       Botão do WhatsApp e botão para voltar ao topo da página.
+       ============================================================ -->
   <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
-
-  <!-- Botão flutuante de voltar ao topo -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
 
-  <!-- Firebase e scripts para contato/redes sociais -->
+  <!-- ============================================================
+       SCRIPTS: FIREBASE, CONTATO, REDES SOCIAIS E MENU MOBILE
+       ============================================================
+       Carrega dados do Firestore, ativa menus e botões interativos.
+       ============================================================ -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script>
@@ -160,8 +183,9 @@
       }
     });
 
-    // --- MOBILE MENU SCRIPTS PADRONIZADOS ---
-    // Menu hamburguer mobile
+    // ============================================================
+    // MENU MOBILE E SUBMENU DE SERVIÇOS
+    // ============================================================
     const btnHamburguer = document.getElementById('menu-hamburguer');
     const menuMobile = document.getElementById('menu-mobile');
     const btnFechar = document.getElementById('fechar-menu');

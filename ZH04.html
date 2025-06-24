@@ -1,13 +1,16 @@
 <!-- ============================================================
-     PÁGINA DE SERVIÇO - UNHAS INFANTIS | ManiClick
+     PÁGINA DE SERVIÇO - DECORAÇÃO ARTÍSTICA | ManiClick
+     ============================================================
+     Estrutura completa da página do serviço, com cabeçalho, menus,
+     conteúdo do serviço, rodapé, botões flutuantes e scripts.
      ============================================================ -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unhas Infantis | ManiClick</title>
-  <meta name="description" content="Cuidados delicados para os pequenos.">
+  <title>Decoração Artística | ManiClick</title>
+  <meta name="description" content="Designs exclusivos para unhas cheias de estilo.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,6 +31,7 @@
         <span></span>
         <span></span>
       </button>
+      <!-- Menu mobile -->
       <nav class="menu-mobile" id="menu-mobile">
         <button class="fechar-menu" id="fechar-menu" aria-label="Fechar menu">&times;</button>
         <ul>
@@ -93,20 +97,20 @@
        ============================================================ -->
   <main class="pagina-servico">
     <section class="servico-destaque">
-      <img src="imagens/unhas-infantis-0.jpg" alt="Unhas Infantis" class="servico-foto-grande">
+      <img src="imagens/decoracao-artistica-0.jpg" alt="Decoração Artística" class="servico-foto-grande">
       <div class="servico-descricao">
-        <h1>Unhas Infantis</h1>
+        <h1>Decoração Artística</h1>
         <p>
-          As unhas infantis recebem atenção especial com produtos suaves e técnicas seguras, garantindo conforto e higiene para as crianças. Oferecemos esmaltação divertida e colorida, perfeita para deixar as unhas dos pequenos lindas e protegidas. Ideal para os cuidados delicados que os pequenos merecem.
+          A decoração artística transforma suas unhas em verdadeiras obras de arte. Com criatividade e atenção aos detalhes, criamos desenhos personalizados que refletem sua personalidade e estilo. Ideal para quem deseja se destacar com unhas únicas, coloridas e cheias de charme.
         </p>
       </div>
     </section>
     <section class="servico-galeria">
-      <h2>Exemplos de Unhas Infantis</h2>
+      <h2>Decoração Artística</h2>
       <div class="servico-fotos">
-        <img src="imagens/unhas-infantis-1.jpeg" alt="Exemplo 1 de Unhas Infantis">
-        <img src="imagens/unhas-infantis-2.jpg" alt="Exemplo 2 de Unhas Infantis">
-        <img src="imagens/unhas-infantis-3.jpg" alt="Exemplo 3 de Unhas Infantis">
+        <img src="imagens/decoracao-artistica-1.jpg" alt="Exemplo 1 de Decoração Artística">
+        <img src="imagens/decoracao-artistica-2.jpg" alt="Exemplo 2 de Decoração Artística">
+        <img src="imagens/decoracao-artistica-3.jpg" alt="Exemplo 3 de Decoração Artística">
       </div>
     </section>
   </main>
@@ -123,18 +127,13 @@
     </div>
   </footer>
   <!-- ============================================================
-       BOTÃO FLUTUANTE WHATSAPP
+       BOTÕES FLUTUANTES
        ============================================================
-       Botão para contato rápido via WhatsApp.
+       Botão do WhatsApp e botão para voltar ao topo da página.
        ============================================================ -->
   <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
-  <!-- ============================================================
-       BOTÃO FLUTUANTE VOLTAR AO TOPO
-       ============================================================
-       Botão para voltar ao topo da página.
-       ============================================================ -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
@@ -181,7 +180,9 @@
         document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
       }
     });
+    // ============================================================
     // MENU MOBILE E SUBMENU DE SERVIÇOS
+    // ============================================================
     const btnHamburguer = document.getElementById('menu-hamburguer');
     const menuMobile = document.getElementById('menu-mobile');
     const btnFechar = document.getElementById('fechar-menu');
@@ -199,14 +200,15 @@
     const submenuServicos = abrirSubmenuMobile.parentElement;
     abrirSubmenuMobile.addEventListener('click', function(e) {
       e.preventDefault();
+      // Alterna abrir/fechar apenas este submenu
       submenuServicos.classList.toggle('ativo');
     });
+    // Impede que clique nos links do submenu feche/abra o menu
     submenuServicos.querySelectorAll('.submenu-lista a').forEach(link => {
       link.addEventListener('click', function(e) {
         e.stopPropagation();
       });
     });
-    // --- FIM MOBILE MENU SCRIPTS ---
   </script>
 </body>
 </html>

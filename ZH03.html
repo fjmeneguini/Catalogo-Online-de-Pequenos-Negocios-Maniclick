@@ -1,13 +1,15 @@
 <!-- ============================================================
-     PÁGINA DE SERVIÇO - UNHAS INFANTIS | ManiClick
+     PÁGINA CONTATE-NOS | ManiClick
+     ============================================================
+     Estrutura completa da página de contato, com cabeçalho, menus,
+     formulário, rodapé, botões flutuantes e scripts.
      ============================================================ -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unhas Infantis | ManiClick</title>
-  <meta name="description" content="Cuidados delicados para os pequenos.">
+  <title>Contate-nos - ManiClick</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,6 +30,7 @@
         <span></span>
         <span></span>
       </button>
+      <!-- Menu mobile -->
       <nav class="menu-mobile" id="menu-mobile">
         <button class="fechar-menu" id="fechar-menu" aria-label="Fechar menu">&times;</button>
         <ul>
@@ -86,30 +89,31 @@
       </nav>
     </div>
   </header>
+
   <!-- ============================================================
-       CONTEÚDO PRINCIPAL DO SERVIÇO
+       CONTEÚDO PRINCIPAL - FORMULÁRIO DE CONTATO
        ============================================================
-       Apresenta o serviço, descrição e galeria de exemplos.
+       Exibe o formulário para o usuário enviar mensagem.
        ============================================================ -->
-  <main class="pagina-servico">
-    <section class="servico-destaque">
-      <img src="imagens/unhas-infantis-0.jpg" alt="Unhas Infantis" class="servico-foto-grande">
-      <div class="servico-descricao">
-        <h1>Unhas Infantis</h1>
-        <p>
-          As unhas infantis recebem atenção especial com produtos suaves e técnicas seguras, garantindo conforto e higiene para as crianças. Oferecemos esmaltação divertida e colorida, perfeita para deixar as unhas dos pequenos lindas e protegidas. Ideal para os cuidados delicados que os pequenos merecem.
-        </p>
-      </div>
-    </section>
-    <section class="servico-galeria">
-      <h2>Exemplos de Unhas Infantis</h2>
-      <div class="servico-fotos">
-        <img src="imagens/unhas-infantis-1.jpeg" alt="Exemplo 1 de Unhas Infantis">
-        <img src="imagens/unhas-infantis-2.jpg" alt="Exemplo 2 de Unhas Infantis">
-        <img src="imagens/unhas-infantis-3.jpg" alt="Exemplo 3 de Unhas Infantis">
+  <main>
+    <section class="contato" id="contato">
+      <div class="contato-card">
+        <h2>Contate-nos</h2>
+        <form id="form-contatenos" action="https://formsubmit.co/sandraalmeidamanicure@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Nova mensagem do site ManiClick">
+          <input type="hidden" name="_replyto" value="">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required>
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="mensagem">Mensagem:</label>
+          <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+          <button type="submit" class="btn">Enviar</button>
+        </form>
       </div>
     </section>
   </main>
+
   <!-- ============================================================
        RODAPÉ PADRÃO
        ============================================================
@@ -117,27 +121,24 @@
        ============================================================ -->
   <footer>
     <div class="container">
-      <div class="contato" id="contato"></div>
+      <div class="contato" id="contato-info"></div>
       <div class="icones" id="icones"></div>
       <p class="final">© 2025 ManiClick</p>
     </div>
   </footer>
+
   <!-- ============================================================
-       BOTÃO FLUTUANTE WHATSAPP
+       BOTÕES FLUTUANTES
        ============================================================
-       Botão para contato rápido via WhatsApp.
+       Botão do WhatsApp e botão para voltar ao topo da página.
        ============================================================ -->
   <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
-  <!-- ============================================================
-       BOTÃO FLUTUANTE VOLTAR AO TOPO
-       ============================================================
-       Botão para voltar ao topo da página.
-       ============================================================ -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
+
   <!-- ============================================================
        SCRIPTS: FIREBASE, CONTATO, REDES SOCIAIS E MENU MOBILE
        ============================================================
@@ -158,11 +159,12 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
     // Carregar contato e redes sociais do Firestore (coleção: contato, doc: info)
     db.collection("contato").doc("info").get().then((doc) => {
       if (doc.exists) {
         const data = doc.data();
-        document.getElementById('contato').innerHTML = `
+        document.getElementById('contato-info').innerHTML = `
           <p><strong>Endereço:</strong> ${data.endereco}</p>
           <p><strong>Telefone:</strong> ${data.telefone}</p>
           <p><strong>Horário:</strong> ${data.horario}</p>
@@ -181,7 +183,10 @@
         document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
       }
     });
+
+    // ============================================================
     // MENU MOBILE E SUBMENU DE SERVIÇOS
+    // ============================================================
     const btnHamburguer = document.getElementById('menu-hamburguer');
     const menuMobile = document.getElementById('menu-mobile');
     const btnFechar = document.getElementById('fechar-menu');
@@ -194,19 +199,24 @@
       const submenuServicos = document.querySelector('.menu-mobile .submenu-servicos');
       if (submenuServicos) submenuServicos.classList.remove('ativo');
     });
+
     // Submenu mobile de serviços
     const abrirSubmenuMobile = document.getElementById('abrir-submenu-mobile');
     const submenuServicos = abrirSubmenuMobile.parentElement;
+
     abrirSubmenuMobile.addEventListener('click', function(e) {
       e.preventDefault();
+      // Alterna abrir/fechar apenas este submenu
       submenuServicos.classList.toggle('ativo');
     });
+
+    // Impede que clique nos links do submenu feche/abra o menu
     submenuServicos.querySelectorAll('.submenu-lista a').forEach(link => {
       link.addEventListener('click', function(e) {
         e.stopPropagation();
       });
     });
-    // --- FIM MOBILE MENU SCRIPTS ---
   </script>
+  <script src="contatenos.js"></script>
 </body>
 </html>

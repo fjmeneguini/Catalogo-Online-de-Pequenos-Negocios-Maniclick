@@ -1,20 +1,18 @@
 <!-- ============================================================
-     PÁGINA DE SERVIÇO - UNHAS INFANTIS | ManiClick
+     PÁGINA DE SERVIÇO - ALONGAMENTO FIBRA DE VIDRO | ManiClick
      ============================================================ -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unhas Infantis | ManiClick</title>
-  <meta name="description" content="Cuidados delicados para os pequenos.">
+  <title>Alongamento Fibra de Vidro | ManiClick</title>
+  <meta name="description" content="Alongamento de fibra de vidro para unhas. Unhas longas, resistentes e naturais.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- ============================================================
        CABEÇALHO E NAVEGAÇÃO
-       ============================================================
-       Inclui logotipo, menus de navegação (desktop e mobile) e botão de agendamento.
        ============================================================ -->
   <header>
     <div class="header-container">
@@ -28,6 +26,7 @@
         <span></span>
         <span></span>
       </button>
+      <!-- Menu mobile -->
       <nav class="menu-mobile" id="menu-mobile">
         <button class="fechar-menu" id="fechar-menu" aria-label="Fechar menu">&times;</button>
         <ul>
@@ -86,34 +85,32 @@
       </nav>
     </div>
   </header>
+
   <!-- ============================================================
        CONTEÚDO PRINCIPAL DO SERVIÇO
-       ============================================================
-       Apresenta o serviço, descrição e galeria de exemplos.
        ============================================================ -->
   <main class="pagina-servico">
     <section class="servico-destaque">
-      <img src="imagens/unhas-infantis-0.jpg" alt="Unhas Infantis" class="servico-foto-grande">
+      <img src="imagens/alongamento-fibra-de-vidro-0.jpg" alt="Alongamento Fibra de Vidro" class="servico-foto-grande">
       <div class="servico-descricao">
-        <h1>Unhas Infantis</h1>
+        <h1>Alongamento Fibra de Vidro</h1>
         <p>
-          As unhas infantis recebem atenção especial com produtos suaves e técnicas seguras, garantindo conforto e higiene para as crianças. Oferecemos esmaltação divertida e colorida, perfeita para deixar as unhas dos pequenos lindas e protegidas. Ideal para os cuidados delicados que os pequenos merecem.
+          O alongamento de fibra de vidro proporciona unhas longas, resistentes e com aspecto natural. Utilizamos materiais de alta qualidade e técnicas profissionais para garantir durabilidade, beleza e conforto. Ideal para quem deseja unhas impecáveis por mais tempo, com acabamento perfeito e personalizado.
         </p>
       </div>
     </section>
     <section class="servico-galeria">
-      <h2>Exemplos de Unhas Infantis</h2>
+      <h2>Exemplos de Alongamento Fibra de Vidro</h2>
       <div class="servico-fotos">
-        <img src="imagens/unhas-infantis-1.jpeg" alt="Exemplo 1 de Unhas Infantis">
-        <img src="imagens/unhas-infantis-2.jpg" alt="Exemplo 2 de Unhas Infantis">
-        <img src="imagens/unhas-infantis-3.jpg" alt="Exemplo 3 de Unhas Infantis">
+        <img src="imagens/alongamento-fibra-de-vidro-1.jpg" alt="Exemplo 1 de Alongamento fibra de vidro">
+        <img src="imagens/alongamento-fibra-de-vidro-2.jpg" alt="Exemplo 2 de Alongamento fibra de vidro">
+        <img src="imagens/alongamento-fibra-de-vidro-3.jpg" alt="Exemplo 3 de Alongamento fibra de vidro">
       </div>
     </section>
   </main>
+
   <!-- ============================================================
        RODAPÉ PADRÃO
-       ============================================================
-       Exibe informações de contato, redes sociais e direitos autorais.
        ============================================================ -->
   <footer>
     <div class="container">
@@ -122,26 +119,19 @@
       <p class="final">© 2025 ManiClick</p>
     </div>
   </footer>
+
   <!-- ============================================================
-       BOTÃO FLUTUANTE WHATSAPP
-       ============================================================
-       Botão para contato rápido via WhatsApp.
+       BOTÕES FLUTUANTES
        ============================================================ -->
   <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">
   </a>
-  <!-- ============================================================
-       BOTÃO FLUTUANTE VOLTAR AO TOPO
-       ============================================================
-       Botão para voltar ao topo da página.
-       ============================================================ -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
+
   <!-- ============================================================
        SCRIPTS: FIREBASE, CONTATO, REDES SOCIAIS E MENU MOBILE
-       ============================================================
-       Carrega dados do Firestore, ativa menus e botões interativos.
        ============================================================ -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -158,6 +148,7 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+
     // Carregar contato e redes sociais do Firestore (coleção: contato, doc: info)
     db.collection("contato").doc("info").get().then((doc) => {
       if (doc.exists) {
@@ -181,7 +172,10 @@
         document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
       }
     });
+
+    // ============================================================
     // MENU MOBILE E SUBMENU DE SERVIÇOS
+    // ============================================================
     const btnHamburguer = document.getElementById('menu-hamburguer');
     const menuMobile = document.getElementById('menu-mobile');
     const btnFechar = document.getElementById('fechar-menu');
@@ -194,19 +188,24 @@
       const submenuServicos = document.querySelector('.menu-mobile .submenu-servicos');
       if (submenuServicos) submenuServicos.classList.remove('ativo');
     });
+
     // Submenu mobile de serviços
     const abrirSubmenuMobile = document.getElementById('abrir-submenu-mobile');
     const submenuServicos = abrirSubmenuMobile.parentElement;
+
     abrirSubmenuMobile.addEventListener('click', function(e) {
       e.preventDefault();
+      // Alterna abrir/fechar apenas este submenu
       submenuServicos.classList.toggle('ativo');
     });
-    submenuServicos.querySelectorAll('.submenu-lista a').forEach(link => {
-      link.addEventListener('click', function(e) {
+
+    // Impede que clique nos links do submenu mobile feche o menu
+    const linksSubmenuMobile = document.querySelectorAll('.menu-mobile .submenu-lista a');
+    linksSubmenuMobile.forEach(link => {
+      link.addEventListener('click', (e) => {
         e.stopPropagation();
       });
     });
-    // --- FIM MOBILE MENU SCRIPTS ---
   </script>
 </body>
 </html>

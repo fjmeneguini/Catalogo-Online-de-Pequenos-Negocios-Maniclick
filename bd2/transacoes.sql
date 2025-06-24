@@ -1,5 +1,11 @@
--- Exemplo de transação: inserir cliente e agendamento juntos
+-- ============================================================
+-- TRANSAÇÕES DO BANCO DE DADOS MANICLICK
+-- ============================================================
 
+-- ============================================================
+-- Exemplo de transação: inserir cliente e agendamento juntos
+-- Este bloco garante que o cliente e o agendamento só serão inseridos se ambos os comandos forem executados com sucesso.
+-- ============================================================
 START TRANSACTION;
 
 INSERT INTO cliente (nome, telefone, email) VALUES ('João Teste', '19912345678', 'joao@email.com');
