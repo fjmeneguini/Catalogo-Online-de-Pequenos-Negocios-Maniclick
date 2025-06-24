@@ -34,6 +34,7 @@ Além de promover a visibilidade e o crescimento dos negócios, o ManiClick ofer
 - Profissionais autônomas do segmento de manicure e pequenos negócios de beleza, que buscam divulgar seus serviços, organizar sua agenda e facilitar o contato com clientes de forma digital e acessível.
 - Clientes que desejam agendar serviços de manicure de maneira prática e rápida, especialmente mulheres de diferentes faixas etárias, que valorizam comodidade, agilidade, confiança e atendimento personalizado.
 - Usuários que buscam praticidade, avaliações reais e opções de contato direto, incluindo pessoas com necessidades de acessibilidade, como comunicação escrita e interface adaptada.
+
 O sistema atende tanto profissionais que querem crescer e se organizar no mercado digital quanto clientes que desejam facilidade, segurança e qualidade ao contratar serviços de manicure.
 
 ## Benefícios
