@@ -15,8 +15,6 @@
 <body>
   <!-- ============================================================
        CABEÇALHO E NAVEGAÇÃO
-       ============================================================
-       Inclui logotipo, menus de navegação (desktop e mobile) e botão de agendamento.
        ============================================================ -->
   <header>
     <div class="header-container">
@@ -36,7 +34,7 @@
         <ul>
           <li><a href="index.html">Início</a></li>
           <li class="submenu-servicos">
-            <a href="#" id="abrir-submenu-mobile">Serviços&#9662;</a>
+            <a href="#" id="abrir-submenu-mobile">Serviços &#9662;</a>
             <ul class="submenu-lista">
               <li><a href="alongamentofibradevidro.html">Alongamento Fibra de Vidro</a></li>
               <li><a href="blindagemdeunhas.html">Blindagem de Unhas</a></li>
@@ -55,7 +53,12 @@
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="#avaliacoes">Avaliações</a></li>
           <li><a href="contatenos.html">Contate-nos</a></li>
-          <li><a href="login.html">Entrar/Cadastrar</a></li>
+          <li id="menu-perfil-mobile" style="display:none;">
+            <a href="#" onclick="abrirPerfil(); return false;">Perfil</a>
+          </li>
+          <li id="menu-login-mobile">
+            <a href="login.html">Entrar/Cadastrar</a>
+          </li>
           <li><a href="index.html#agendar" class="btn-agendar">Agende seu horário</a></li>
         </ul>
       </nav>
@@ -64,7 +67,7 @@
         <ul class="menu-principal">
           <li><a href="index.html">Início</a></li>
           <li class="submenu-servicos">
-            <a href="index.html#servicos">Serviços </a>
+            <a href="#servicos">Serviços</a>
             <ul class="submenu-lista">
               <li><a href="alongamentofibradevidro.html">Alongamento Fibra de Vidro</a></li>
               <li><a href="blindagemdeunhas.html">Blindagem de Unhas</a></li>
@@ -83,7 +86,12 @@
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="#avaliacoes">Avaliações</a></li>
           <li><a href="contatenos.html">Contate-nos</a></li>
-          <li><a href="login.html">Entrar/Cadastrar</a></li>
+          <li id="menu-perfil" style="display:none;">
+            <a href="#" onclick="abrirPerfil(); return false;">Perfil</a>
+          </li>
+          <li id="menu-login">
+            <a href="login.html">Entrar/Cadastrar</a>
+          </li>
           <li><a href="index.html#agendar" class="btn-agendar">Agende seu horário</a></li>
         </ul>
       </nav>
@@ -91,8 +99,6 @@
   </header>
   <!-- ============================================================
        SEÇÃO HERO (BANNER PRINCIPAL)
-       ============================================================
-       Apresenta o nome do site, chamada e botão de agendamento.
        ============================================================ -->
   <section class="hero" id="inicio">
     <div class="container">
@@ -103,8 +109,6 @@
   </section>
   <!-- ============================================================
        SEÇÃO DE SERVIÇOS
-       ============================================================
-       Lista os serviços oferecidos, carregados via JS.
        ============================================================ -->
   <section class="servicos" id="servicos" data-aos="fade-up">
     <div class="container">
@@ -116,8 +120,6 @@
   </section>
   <!-- ============================================================
        GALERIA DE FOTOS
-       ============================================================
-       Exibe imagens de trabalhos realizados.
        ============================================================ -->
   <section class="galeria" data-aos="fade-up">
     <div class="container">
@@ -142,8 +144,6 @@
   </section>
   <!-- ============================================================
        SEÇÃO DEPOIMENTOS/AVALIAÇÕES
-       ============================================================
-       Exibe avaliações de clientes, carregadas via JS.
        ============================================================ -->
   <section class="depoimentos" id="avaliacoes" data-aos="fade-up">
     <div class="container">
@@ -155,8 +155,6 @@
   </section>
   <!-- ============================================================
        SEÇÃO DE AGENDAMENTO
-       ============================================================
-       Formulário para agendar horário, com validação e feedback.
        ============================================================ -->
   <section class="contato" id="agendar" data-aos="fade-up">
     <div class="agendar-card">
@@ -166,17 +164,18 @@
         <p class="agendar-sub">Escolha o melhor dia e horário para você!</p>
       </div>
       <form id="form-agendamento">
-        <input type="text" name="nome" placeholder="Seu nome" required>
-        <input type="tel" name="telefone" placeholder="Telefone/WhatsApp" required>
-        <select name="data" id="data" required>
+        <input type="text" name="nome" id="agendamento-nome" placeholder="Seu nome" required readonly style="background:#f8f9fa;cursor:not-allowed;">
+        <input type="tel" name="telefone" id="agendamento-telefone" placeholder="Telefone/WhatsApp" required readonly style="background:#f8f9fa;cursor:not-allowed;">
+        <p id="msg-login-agendamento" style="color:#d63384;font-size:0.9em;margin:10px 0;">
+          Para agendar, você precisa estar <a href="login.html" style="color:#d63384;text-decoration:underline;">logado em sua conta</a>.
+        </p>
+        <select name="data" id="data" required disabled>
           <option value="">Selecione a data</option>
-          <!-- opções geradas via JS -->
         </select>
-        <select name="hora" id="hora" required>
+        <select name="hora" id="hora" required disabled>
           <option value="">Selecione o horário</option>
-          <!-- opções geradas via JS -->
         </select>
-        <button type="submit" class="btn btn-agendar-form">Agendar agora</button>
+        <button type="submit" class="btn btn-agendar-form" disabled>Agendar agora</button>
         <div id="mensagem-sucesso" style="display:none;color:var(--verde);margin-top:10px;text-align:center;">
           Agendamento realizado com sucesso!
         </div>
@@ -185,8 +184,6 @@
   </section>
   <!-- ============================================================
        SEÇÃO LOCALIZAÇÃO/MAPA
-       ============================================================
-       Mostra o endereço do salão no Google Maps.
        ============================================================ -->
   <section class="sessao-mapa">
     <h2 class="titulo-sessao" style="margin-bottom:16px;">Localização</h2>
@@ -204,8 +201,6 @@
   </section>
   <!-- ============================================================
        RODAPÉ PADRÃO
-       ============================================================
-       Exibe informações de contato, redes sociais e direitos autorais.
        ============================================================ -->
   <footer>
     <div class="container">
@@ -216,64 +211,82 @@
   </footer>
   <!-- ============================================================
        BOTÃO FLUTUANTE VOLTAR AO TOPO
-       ============================================================
-       Botão para voltar ao topo da página.
        ============================================================ -->
   <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
   <!-- ============================================================
+       MODAL PERFIL
+       ============================================================ -->
+    <!-- ============================================================
+       MODAL PERFIL MODERNO
+       ============================================================ -->
+  <div id="perfil-modal">
+    <div class="perfil-card">
+      <!-- Header do Perfil -->
+      <div class="perfil-header">
+        <div class="user-icon">👤</div>
+        <h2>Meu Perfil</h2>
+        <button class="fechar-perfil" onclick="fecharPerfil()" aria-label="Fechar perfil">✕</button>
+      </div>
+
+      <!-- Conteúdo do Perfil -->
+      <div class="perfil-content">
+        <!-- Dados principais -->
+        <div id="perfil-dados"></div>
+
+        <!-- Seção de telefone -->
+        <div class="perfil-section" id="telefone-section" style="display:none;">
+          <h3>📱 Alterar Telefone</h3>
+          <button id="btn-salvar-telefone" disabled class="btn-perfil">💾 Salvar telefone</button>
+          <div id="perfil-telefone-msg"></div>
+
+        </div>
+
+        <!-- Seção de email -->
+        <div class="perfil-section">
+          <h3>✉️ Gerenciar Email</h3>
+          <button id="btn-alterar-email" class="btn-perfil">🔄 Alterar Email</button>
+          
+          <div id="alteracao-email" style="display:none;" class="perfil-section">
+            <h3>🔐 Alterar Email</h3>
+            <div style="margin-bottom:16px;">
+              <label style="font-size:12px;color:#6c757d;font-weight:600;">Email atual - Código de verificação:</label>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:8px;">
+                <input type="text" id="codigo-email-atual" placeholder="Código do email atual" maxlength="6" style="flex:1;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;">
+                <button type="button" id="enviar-codigo-atual" class="btn-small btn-warning">Enviar código</button>
+              </div>
+            </div>
+            <div id="novo-email-section" style="display:none;">
+              <label style="font-size:12px;color:#6c757d;font-weight:600;">Novo email:</label>
+              <input type="email" id="novo-email" placeholder="Digite o novo email" style="width:100%;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;margin:8px 0 12px 0;box-sizing:border-box;">
+              <div style="display:flex;gap:12px;align-items:center;">
+                <input type="text" id="codigo-email-novo" placeholder="Código do novo email" maxlength="6" style="flex:1;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;">
+                <button type="button" id="verificar-email-novo" class="btn-small btn-warning">Verificar</button>
+              </div>
+            </div>
+            <button type="button" id="cancelar-alteracao-email" class="btn-small btn-secondary" style="margin-top:12px;">Cancelar</button>
+          </div>
+        </div>
+
+        <!-- Ações principais -->
+        <div class="perfil-actions">
+          <button id="btn-logout" class="btn-perfil">🚪 Sair da Conta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================
        SCRIPTS: AOS, FIREBASE, SERVIÇOS, AVALIAÇÕES, AGENDAMENTO,
-       CONTATO, REDES SOCIAIS E MENU MOBILE
-       ============================================================
-       Carrega dados do Firestore, ativa menus e botões interativos.
+       CONTATO, REDES SOCIAIS, MENU MOBILE E PERFIL
        ============================================================ -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script>
-    // Inicialização de animações AOS
     AOS.init();
-    // ============================================================
-    // FORMULÁRIO DE AGENDAMENTO
-    // ============================================================
-    document.getElementById('form-agendamento').onsubmit = function(e) {
-      e.preventDefault();
-      const nome = this.nome.value;
-      const telefone = this.telefone.value;
-      const data = this.data.value;
-      const hora = this.hora.value;
-      db.collection("agendamentos")
-        .where("data", "==", data)
-        .where("hora", "==", hora)
-        .get()
-        .then((querySnapshot) => {
-          if (!querySnapshot.empty) {
-            alert("Esse horário já foi agendado. Por favor, escolha outro.");
-            atualizarHorariosDisponiveis(data);
-          } else {
-            db.collection("agendamentos").add({
-              nome,
-              telefone,
-              data,
-              hora,
-              criadoEm: firebase.firestore.FieldValue.serverTimestamp()
-            }).then(() => {
-              document.getElementById('mensagem-sucesso').style.display = 'block';
-              setTimeout(() => {
-                document.getElementById('mensagem-sucesso').style.display = 'none';
-                document.getElementById('form-agendamento').reset();
-                document.getElementById('hora').innerHTML = '<option value="">Selecione o horário</option>';
-              }, 3000);
-            }).catch(() => {
-              alert('Erro ao enviar agendamento. Tente novamente.');
-            });
-          }
-        });
-    };
-    // ============================================================
-    // FIREBASE CONFIG E INSTÂNCIA
-    // ============================================================
+
     const firebaseConfig = {
       apiKey: "AIzaSyDh8Rm-kx1HNbZewCv5D29EO3SMw_CDjyg",
       authDomain: "copn---maniclick.firebaseapp.com",
@@ -285,9 +298,8 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
-    // ============================================================
-    // CARREGAR SERVIÇOS DO FIRESTORE
-    // ============================================================
+    const auth = firebase.auth();
+
     db.collection("servicos").get().then((querySnapshot) => {
       const ul = document.getElementById('lista-servicos');
       let html = '';
@@ -297,9 +309,7 @@
       });
       ul.innerHTML = html;
     });
-    // ============================================================
-    // CARREGAR AVALIAÇÕES DO FIRESTORE
-    // ============================================================
+
     document.addEventListener('DOMContentLoaded', function() {
       db.collection("avaliacoes").get().then((querySnapshot) => {
         const grid = document.getElementById('depoimentos-grid');
@@ -311,9 +321,7 @@
         grid.innerHTML = html;
       });
     });
-    // ============================================================
-    // CARREGAR CONTATO E REDES SOCIAIS DO FIRESTORE
-    // ============================================================
+
     db.collection("contato").doc("info").get().then((doc) => {
       if (doc.exists) {
         const data = doc.data();
@@ -336,49 +344,11 @@
         document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
       }
     });
-    // ============================================================
-    // LÓGICA DE DATAS E HORÁRIOS DISPONÍVEIS PARA AGENDAMENTO
-    // ============================================================
+
     const horariosPossiveis = [
       "09:00", "10:00", "11:00", "12:00",
       "13:00", "14:00", "15:00", "16:00", "17:00"
     ];
-    const dataInput = document.getElementById('data');
-    const hoje = new Date();
-    dataInput.min = hoje.toISOString().split('T')[0];
-    dataInput.addEventListener('input', function() {
-      const dataSelecionada = new Date(this.value);
-      if (dataSelecionada.getDay() === 0) {
-        alert('Não é possível agendar aos domingos.');
-        this.value = '';
-      }
-    });
-    dataInput.addEventListener('change', function() {
-      atualizarHorariosDisponiveis(this.value);
-    });
-    document.getElementById('data').addEventListener('keydown', function(e) {
-      e.preventDefault();
-    });
-    function atualizarHorariosDisponiveis(dataSelecionada) {
-      db.collection("agendamentos")
-        .where("data", "==", dataSelecionada)
-        .get()
-        .then((querySnapshot) => {
-          const horariosAgendados = [];
-          querySnapshot.forEach(doc => {
-            horariosAgendados.push(doc.data().hora);
-          });
-          const horariosLivres = horariosPossiveis.filter(h => !horariosAgendados.includes(h));
-          const select = document.getElementById('hora');
-          select.innerHTML = '<option value="">Selecione o horário</option>' +
-            horariosLivres.map(h => `<option value="${h}">${h}</option>`).join('');
-          if (horariosLivres.length === 0) {
-            alert('Todos os horários deste dia estão esgotados. Escolha outra data.');
-            dataInput.value = '';
-            select.innerHTML = '<option value="">Selecione o horário</option>';
-          }
-        });
-    }
     function gerarDatasDisponiveis(qtdDias = 30) {
       const datas = [];
       const hoje = new Date();
@@ -386,8 +356,10 @@
         const data = new Date(hoje);
         data.setDate(hoje.getDate() + i);
         if (data.getDay() !== 0) {
-          const dataStr = data.toISOString().split('T')[0];
-          datas.push(dataStr);
+          const yyyy = data.getFullYear();
+          const mm = String(data.getMonth() + 1).padStart(2, '0');
+          const dd = String(data.getDate()).padStart(2, '0');
+          datas.push(`${yyyy}-${mm}-${dd}`);
         }
       }
       return datas;
@@ -403,13 +375,82 @@
         dataSelect.appendChild(option);
       });
     }
-    preencherDatas();
+
+    function atualizarHorariosDisponiveis(dataSelecionada) {
+      db.collection("agendamentos")
+        .where("data", "==", dataSelecionada)
+        .get()
+        .then((querySnapshot) => {
+          const horariosAgendados = [];
+          querySnapshot.forEach(doc => {
+            horariosAgendados.push(doc.data().hora);
+          });
+          const horaSelect = document.getElementById('hora');
+          horaSelect.innerHTML = '<option value="">Selecione o horário</option>';
+          horariosPossiveis.forEach(hora => {
+            if (!horariosAgendados.includes(hora)) {
+              const option = document.createElement('option');
+              option.value = hora;
+              option.textContent = hora;
+              horaSelect.appendChild(option);
+            }
+          });
+        });
+    }
     dataSelect.addEventListener('change', function() {
       atualizarHorariosDisponiveis(this.value);
     });
-    // ============================================================
-    // MENU MOBILE E SUBMENU DE SERVIÇOS
-    // ============================================================
+
+    document.getElementById('form-agendamento').onsubmit = function(e) {
+      e.preventDefault();
+      
+      const user = auth.currentUser;
+      if (!user) {
+        alert('Você precisa estar logado para agendar um horário.');
+        return;
+      }
+      
+      const nome = this.nome.value;
+      const telefone = this.telefone.value;
+      const data = this.data.value;
+      const hora = this.hora.value;
+      
+      if (!nome || !telefone) {
+        alert('Por favor, complete seus dados no perfil antes de agendar.');
+        return;
+      }
+      
+      db.collection("agendamentos")
+        .where("data", "==", data)
+        .where("hora", "==", hora)
+        .get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            atualizarHorariosDisponiveis(data);
+            alert('Horário já agendado! Escolha outro.');
+          } else {
+            db.collection("agendamentos").add({
+              nome, 
+              telefone, 
+              data, 
+              hora, 
+              usuarioId: user.uid,
+              criadoEm: new Date().toISOString()
+            }).then(() => {
+              document.getElementById('mensagem-sucesso').style.display = '';
+              // Não reseta o form, apenas limpa data e hora
+              document.getElementById('data').value = '';
+              document.getElementById('hora').value = '';
+              setTimeout(() => {
+                document.getElementById('mensagem-sucesso').style.display = 'none';
+              }, 2500);
+              preencherDatas();
+              document.getElementById('hora').innerHTML = '<option value="">Selecione o horário</option>';
+            });
+          }
+        });
+    };
+
     const btnHamburguer = document.getElementById('menu-hamburguer');
     const menuMobile = document.getElementById('menu-mobile');
     const btnFechar = document.getElementById('fechar-menu');
@@ -418,26 +459,376 @@
     });
     btnFechar.addEventListener('click', () => {
       menuMobile.classList.remove('ativo');
-      // Fecha também o submenu se estiver aberto
       const submenuServicos = document.querySelector('.menu-mobile .submenu-servicos');
       if (submenuServicos) submenuServicos.classList.remove('ativo');
     });
     const abrirSubmenuMobile = document.getElementById('abrir-submenu-mobile');
-    const submenuServicos = abrirSubmenuMobile.parentElement;
-    abrirSubmenuMobile.addEventListener('click', function(e) {
-      e.preventDefault();
-      submenuServicos.classList.toggle('ativo');
-    });
-    submenuServicos.querySelectorAll('.submenu-lista a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.stopPropagation();
+    if (abrirSubmenuMobile) {
+      const submenuServicos = abrirSubmenuMobile.parentElement;
+      abrirSubmenuMobile.addEventListener('click', function(e) {
+        e.preventDefault();
+        submenuServicos.classList.toggle('ativo');
       });
+      submenuServicos.querySelectorAll('.submenu-lista a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      });
+    }
+
+    auth.onAuthStateChanged(function(user) {
+      // Menu visibility
+      document.getElementById('menu-login').style.display = user ? 'none' : '';
+      document.getElementById('menu-perfil').style.display = user ? '' : 'none';
+      const menuLoginMobile = document.getElementById('menu-login-mobile');
+      const menuPerfilMobile = document.getElementById('menu-perfil-mobile');
+      if (menuLoginMobile) menuLoginMobile.style.display = user ? 'none' : '';
+      if (menuPerfilMobile) menuPerfilMobile.style.display = user ? '' : 'none';
+      
+      // Agendamento form management
+      const nomeInput = document.getElementById('agendamento-nome');
+      const telefoneInput = document.getElementById('agendamento-telefone');
+      const msgLogin = document.getElementById('msg-login-agendamento');
+      const dataSelect = document.getElementById('data');
+      const horaSelect = document.getElementById('hora');
+      const btnAgendar = document.querySelector('.btn-agendar-form');
+      
+      if (user) {
+        // Usuario logado - preenche dados e habilita formulario
+        db.collection("usuarios").doc(user.uid).get().then(function(doc) {
+          const info = doc.exists ? doc.data() : {};
+          const nome = info.nome || user.displayName || '';
+          const telefone = info.telefone || '';
+          
+          nomeInput.value = nome;
+          telefoneInput.value = telefone;
+          nomeInput.style.background = '#fff';
+          telefoneInput.style.background = '#fff';
+          nomeInput.style.cursor = 'default';
+          telefoneInput.style.cursor = 'default';
+          msgLogin.style.display = 'none';
+          dataSelect.disabled = false;
+          horaSelect.disabled = false;
+          btnAgendar.disabled = false;
+          
+          // Verificar se tem telefone (verificação SMS não é mais necessária)
+          if (!telefone) {
+            msgLogin.innerHTML = 'Complete seu <a href="#" onclick="abrirPerfil(); return false;" style="color:#d63384;text-decoration:underline;">telefone no perfil</a> para agendar.';
+            msgLogin.style.display = 'block';
+            dataSelect.disabled = true;
+            horaSelect.disabled = true;
+            btnAgendar.disabled = true;
+          } else {
+            // Carrega as datas disponíveis se usuário tem telefone
+            preencherDatas();
+          }
+        });
+      } else {
+        // Usuario não logado - limpa e desabilita formulario
+        nomeInput.value = '';
+        telefoneInput.value = '';
+        nomeInput.style.background = '#f8f9fa';
+        telefoneInput.style.background = '#f8f9fa';
+        nomeInput.style.cursor = 'not-allowed';
+        telefoneInput.style.cursor = 'not-allowed';
+        msgLogin.innerHTML = 'Para agendar, você precisa estar <a href="login.html" style="color:#d63384;text-decoration:underline;">logado em sua conta</a>.';
+        msgLogin.style.display = 'block';
+        dataSelect.disabled = true;
+        horaSelect.disabled = true;
+        btnAgendar.disabled = true;
+        // Limpa as opções de data e hora
+        dataSelect.innerHTML = '<option value="">Selecione a data</option>';
+        horaSelect.innerHTML = '<option value="">Selecione o horário</option>';
+      }
     });
+
+    // ============================================================
+    // SISTEMA DE VERIFICAÇÃO NO PERFIL
+    // ============================================================
+    let perfilVerificacao = {
+      novoTelefone: null,
+      codigoTelSMS: null,
+      novoEmail: null,
+      codigoEmailAtual: null,
+      codigoEmailNovo: null,
+      emailAtualVerificado: false
+    };
+
+    function gerarCodigoVerificacao() {
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    function enviarCodigoSMS(telefone, codigo) {
+      // SMS desabilitado - apenas salva sem verificação
+      console.log(`SMS desabilitado para ${telefone}: Código ${codigo}`);
+      return Promise.resolve(true);
+    }
+
+    function enviarCodigoEmail(email, codigo) {
+      console.log(`Email enviado para ${email}: Código ${codigo}`);
+      alert(`Código Email simulado para ${email}: ${codigo}`);
+      return Promise.resolve(true);
+    }
+
+    // Event listeners para alteração de email
+    document.getElementById('btn-alterar-email').addEventListener('click', function() {
+      document.getElementById('alteracao-email').style.display = 'block';
+      this.style.display = 'none';
+    });
+
+    document.getElementById('cancelar-alteracao-email').addEventListener('click', function() {
+      document.getElementById('alteracao-email').style.display = 'none';
+      document.getElementById('btn-alterar-email').style.display = 'block';
+      // Reset do processo
+      perfilVerificacao.emailAtualVerificado = false;
+      document.getElementById('novo-email-section').style.display = 'none';
+    });
+
+    document.getElementById('enviar-codigo-atual').addEventListener('click', function() {
+      const user = auth.currentUser;
+      if (!user) return;
+      
+      perfilVerificacao.codigoEmailAtual = gerarCodigoVerificacao();
+      enviarCodigoEmail(user.email, perfilVerificacao.codigoEmailAtual);
+      this.textContent = 'Código enviado';
+      this.disabled = true;
+    });
+
+    document.getElementById('codigo-email-atual').addEventListener('input', function() {
+      if (this.value.trim() === perfilVerificacao.codigoEmailAtual) {
+        perfilVerificacao.emailAtualVerificado = true;
+        this.style.background = '#d4edda';
+        document.getElementById('novo-email-section').style.display = 'block';
+        alert('Email atual verificado! Agora digite o novo email.');
+      }
+    });
+
+    document.getElementById('novo-email').addEventListener('blur', function() {
+      const novoEmail = this.value.trim();
+      if (novoEmail && novoEmail.includes('@') && perfilVerificacao.emailAtualVerificado) {
+        perfilVerificacao.novoEmail = novoEmail;
+        perfilVerificacao.codigoEmailNovo = gerarCodigoVerificacao();
+        enviarCodigoEmail(novoEmail, perfilVerificacao.codigoEmailNovo);
+      }
+    });
+
+    document.getElementById('verificar-email-novo').addEventListener('click', function() {
+      const codigoDigitado = document.getElementById('codigo-email-novo').value.trim();
+      if (codigoDigitado === perfilVerificacao.codigoEmailNovo) {
+        // Atualizar email no Firebase Auth e Firestore
+        const user = auth.currentUser;
+        user.updateEmail(perfilVerificacao.novoEmail)
+          .then(() => {
+            return db.collection("usuarios").doc(user.uid).update({
+              email: perfilVerificacao.novoEmail,
+              emailVerificado: true
+            });
+          })
+          .then(() => {
+            alert('Email atualizado com sucesso!');
+            document.getElementById('alteracao-email').style.display = 'none';
+            document.getElementById('btn-alterar-email').style.display = 'block';
+            fecharPerfil();
+          })
+          .catch(error => {
+            alert('Erro ao atualizar email: ' + error.message);
+          });
+      } else {
+        alert('Código incorreto. Tente novamente.');
+      }
+    });
+
+    function telefoneValido(telefone) {
+      const tel = telefone.replace(/\D/g, '');
+      return /^(\d{10,11})$/.test(tel);
+    }
+
+    function abrirPerfil() {
+      var modal = document.getElementById('perfil-modal');
+      var dados = document.getElementById('perfil-dados');
+      var btnSalvar = document.getElementById('btn-salvar-telefone');
+      var msg = document.getElementById('perfil-telefone-msg');
+      var user = auth.currentUser;
+      if (!user) return;
+      db.collection("usuarios").doc(user.uid).get().then(function(doc) {
+        var info = doc.exists ? doc.data() : {};
+        
+        // Status de verificação
+        const emailStatus = '<span class="field-status status-verified">✓ Verificado</span>';
+        // Telefone não precisa mais de verificação SMS
+        const telefoneStatus = '';
+        
+        dados.innerHTML = `
+          <!-- Campo Nome -->
+          <div class="perfil-field">
+            <div class="field-icon">👤</div>
+            <div class="field-content">
+              <div class="field-label">Nome Completo</div>
+              <div class="field-value">${info.nome || user.displayName || 'Não informado'}</div>
+            </div>
+          </div>
+
+          <!-- Campo Email -->
+          <div class="perfil-field">
+            <div class="field-icon">✉️</div>
+            <div class="field-content">
+              <div class="field-label">Email</div>
+              <div class="field-value">${user.email} ${emailStatus}</div>
+            </div>
+          </div>
+
+          <!-- Campo Telefone -->
+          <div class="perfil-field">
+            <div class="field-icon">📱</div>
+            <div class="field-content">
+              <div class="field-label">Telefone</div>
+              <div class="field-value">
+                ${info.telefone || 'Não informado'} ${info.telefone ? telefoneStatus : ''}
+                <button type="button" class="btn-small btn-warning" onclick="editarTelefone()" style="margin-left:8px;">
+                  ${info.telefone ? 'Alterar' : 'Adicionar'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        // Função para editar telefone
+        window.editarTelefone = function() {
+          const telefoneSection = document.getElementById('telefone-section');
+          const inputTelefone = document.getElementById('perfil-telefone');
+          
+          telefoneSection.style.display = 'block';
+          inputTelefone.value = info.telefone || '';
+          
+          // Configurar o listener do input
+          window.configurarInputTelefone();
+          
+          inputTelefone.focus();
+          
+          // SMS desabilitado - telefone será salvo sem verificação
+          // A verificação agora é opcional, não obrigatória
+        };
+        
+        // Configurar botão salvar e modal
+        btnSalvar.disabled = true;
+        btnSalvar.textContent = '💾 Salvar telefone';
+        msg.style.display = 'none';
+        msg.textContent = '';
+        modal.style.display = 'flex';
+
+        // Configurar listener do input telefone (será ativado quando a seção for mostrada)
+        window.configurarInputTelefone = function() {
+          var inputTel = document.getElementById('perfil-telefone');
+          var telefoneOriginal = inputTel.value;
+          inputTel.classList.remove('erro');
+          
+          // Remover listeners antigos
+          inputTel.removeEventListener('input', window.inputTelHandler);
+          
+          // Criar novo handler
+          window.inputTelHandler = function() {
+            var novoTel = inputTel.value.trim();
+            if (novoTel === telefoneOriginal) {
+              btnSalvar.disabled = true;
+              msg.style.display = 'none';
+              inputTel.classList.remove('erro');
+            } else if (!telefoneValido(novoTel)) {
+              btnSalvar.disabled = true;
+              msg.textContent = 'Informe um telefone válido (com DDD, apenas números)';
+              msg.style.display = 'block';
+              inputTel.classList.add('erro');
+            } else {
+              btnSalvar.disabled = false;
+              msg.style.display = 'none';
+              inputTel.classList.remove('erro');
+            }
+          };
+          
+          // Adicionar o listener
+          inputTel.addEventListener('input', window.inputTelHandler);
+        };
+      });
+    }
+
+    document.getElementById('btn-salvar-telefone').onclick = function() {
+      var user = auth.currentUser;
+      var inputTel = document.getElementById('perfil-telefone');
+      var novoTelefone = inputTel.value.trim();
+      var msg = document.getElementById('perfil-telefone-msg');
+      
+      if (!user || !telefoneValido(novoTelefone)) {
+        inputTel.classList.add('erro');
+        msg.textContent = 'Informe um telefone válido (com DDD, apenas números)';
+        msg.style.display = 'block';
+        return;
+      }
+
+      // Verificar se é diferente do telefone atual
+      db.collection("usuarios").doc(user.uid).get().then(function(doc) {
+        const dadosAtuais = doc.exists ? doc.data() : {};
+        if (dadosAtuais.telefone === novoTelefone) {
+          alert('Este já é seu telefone atual.');
+          return;
+        }
+
+        // Salvar telefone diretamente sem verificação SMS
+        this.disabled = true;
+        this.textContent = 'Salvando...';
+        
+        db.collection("usuarios").doc(user.uid).update({ 
+          telefone: novoTelefone,
+          telefoneVerificado: false // Não verificado por SMS, mas aceito
+        })
+        .then(function() {
+          alert('Telefone salvo com sucesso!');
+          // Atualiza o formulário de agendamento
+          const telefoneAgendamento = document.getElementById('agendamento-telefone');
+          if (telefoneAgendamento) {
+            telefoneAgendamento.value = novoTelefone;
+          }
+          // Habilita o formulário de agendamento
+          const msgLogin = document.getElementById('msg-login-agendamento');
+          const dataSelect = document.getElementById('data');
+          const horaSelect = document.getElementById('hora');
+          const btnAgendar = document.querySelector('.btn-agendar-form');
+          if (msgLogin && msgLogin.style.display !== 'none' && msgLogin.innerHTML.includes('telefone no perfil')) {
+            msgLogin.style.display = 'none';
+            dataSelect.disabled = false;
+            horaSelect.disabled = false;
+            btnAgendar.disabled = false;
+            preencherDatas();
+          }
+          fecharPerfil();
+        }.bind(this))
+        .catch(function() {
+          alert('Erro ao salvar telefone.');
+          this.disabled = false;
+          this.textContent = '💾 Salvar telefone';
+        }.bind(this));
+      }.bind(this));
+    };
+
+    // Event listener para verificar código SMS removido - não há mais verificação SMS
+
+    function fecharPerfil() {
+      document.getElementById('perfil-modal').style.display = 'none';
+      document.getElementById('telefone-section').style.display = 'none';
+      document.getElementById('perfil-telefone-msg').style.display = 'none';
+      document.getElementById('alteracao-email').style.display = 'none';
+      document.getElementById('btn-alterar-email').style.display = 'block';
+      // Reset do estado de verificação (apenas email)
+      perfilVerificacao.emailAtualVerificado = false;
+      document.getElementById('novo-email-section').style.display = 'none';
+    }
+    document.getElementById('btn-logout').onclick = function() {
+      auth.signOut().then(function() {
+        fecharPerfil();
+        window.location.reload();
+      });
+    };
   </script>
   <!-- ============================================================
        BOTÃO FLUTUANTE WHATSAPP
-       ============================================================
-       Botão para contato rápido via WhatsApp.
        ============================================================ -->
   <a id="whatsapp-link" href="#" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <img src="imagens/whatsapp.png" alt="WhatsApp">

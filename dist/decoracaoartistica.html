@@ -53,7 +53,12 @@
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="index.html#avaliacoes">Avaliações</a></li>
           <li><a href="contatenos.html">Contate-nos</a></li>
-          <li><a href="login.html">Entrar/Cadastrar</a></li>
+          <li id="menu-perfil-mobile" style="display:none;">
+            <a href="#" onclick="abrirPerfil(); return false;">Perfil</a>
+          </li>
+          <li id="menu-login-mobile">
+            <a href="login.html">Entrar/Cadastrar</a>
+          </li>
           <li><a href="index.html#agendar" class="btn-agendar">Agende seu horário</a></li>
         </ul>
       </nav>
@@ -81,7 +86,12 @@
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="index.html#avaliacoes">Avaliações</a></li>
           <li><a href="contatenos.html">Contate-nos</a></li>
-          <li><a href="login.html">Entrar/Cadastrar</a></li>
+          <li id="menu-perfil" style="display:none;">
+            <a href="#" onclick="abrirPerfil(); return false;">Perfil</a>
+          </li>
+          <li id="menu-login">
+            <a href="login.html">Entrar/Cadastrar</a>
+          </li>
           <li><a href="index.html#agendar" class="btn-agendar">Agende seu horário</a></li>
         </ul>
       </nav>
@@ -103,7 +113,7 @@
       </div>
     </section>
     <section class="servico-galeria">
-      <h2>Decoração Artística</h2>
+      <h2>Exemplos de Decoração Artística</h2>
       <div class="servico-fotos">
         <img src="imagens/decoracao-artistica-1.jpg" alt="Exemplo 1 de Decoração Artística">
         <img src="imagens/decoracao-artistica-2.jpg" alt="Exemplo 2 de Decoração Artística">
@@ -135,12 +145,26 @@
     ▲
   </button>
   <!-- ============================================================
-       SCRIPTS: FIREBASE, CONTATO, REDES SOCIAIS E MENU MOBILE
+       MODAL PERFIL
+       ============================================================
+       Modal que exibe as informações do perfil do usuário e opções de logout.
+       ============================================================ -->
+  <div id="perfil-modal">
+    <div class="perfil-card">
+      <h2>Meu Perfil</h2>
+      <div id="perfil-dados"></div>
+      <button id="btn-logout">Sair</button>
+      <button class="fechar-perfil" onclick="fecharPerfil()" aria-label="Fechar perfil">&times;</button>
+    </div>
+  </div>
+  <!-- ============================================================
+       SCRIPTS: FIREBASE, CONTATO, REDES SOCIAIS, MENU MOBILE E PERFIL
        ============================================================
        Carrega dados do Firestore, ativa menus e botões interativos.
        ============================================================ -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script>
     // Configuração do Firebase
     const firebaseConfig = {
@@ -154,6 +178,8 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+    const auth = firebase.auth();
+
     // Carregar contato e redes sociais do Firestore (coleção: contato, doc: info)
     db.collection("contato").doc("info").get().then((doc) => {
       if (doc.exists) {
@@ -177,6 +203,7 @@
         document.getElementById('whatsapp-link').href = `https://wa.me/${data.whatsapp}`;
       }
     });
+
     // ============================================================
     // MENU MOBILE E SUBMENU DE SERVIÇOS
     // ============================================================
@@ -206,6 +233,43 @@
         e.stopPropagation();
       });
     });
+
+    // ============================================================
+    // PERFIL: Troca menu, mostra modal, logout
+    // ============================================================
+    auth.onAuthStateChanged(function(user) {
+      document.getElementById('menu-login').style.display = user ? 'none' : '';
+      document.getElementById('menu-perfil').style.display = user ? '' : 'none';
+      const menuLoginMobile = document.getElementById('menu-login-mobile');
+      const menuPerfilMobile = document.getElementById('menu-perfil-mobile');
+      if (menuLoginMobile) menuLoginMobile.style.display = user ? 'none' : '';
+      if (menuPerfilMobile) menuPerfilMobile.style.display = user ? '' : 'none';
+    });
+
+    function abrirPerfil() {
+      var modal = document.getElementById('perfil-modal');
+      var dados = document.getElementById('perfil-dados');
+      var user = auth.currentUser;
+      if (!user) return;
+      db.collection("usuarios").doc(user.uid).get().then(function(doc) {
+        var info = doc.exists ? doc.data() : {};
+        dados.innerHTML = `
+          <strong>Nome:</strong> ${info.nome || user.displayName || '-'}<br>
+          <strong>E-mail:</strong> ${user.email}<br>
+          <strong>Telefone:</strong> ${info.telefone || '-'}
+        `;
+        modal.style.display = 'flex';
+      });
+    }
+    function fecharPerfil() {
+      document.getElementById('perfil-modal').style.display = 'none';
+    }
+    document.getElementById('btn-logout').onclick = function() {
+      auth.signOut().then(function() {
+        fecharPerfil();
+        window.location.reload();
+      });
+    };
   </script>
 </body>
 </html>

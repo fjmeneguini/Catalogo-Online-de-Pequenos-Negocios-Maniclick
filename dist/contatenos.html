@@ -52,7 +52,12 @@
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="index.html#avaliacoes">Avaliações</a></li>
           <li><a href="contatenos.html">Contate-nos</a></li>
-          <li><a href="login.html">Entrar/Cadastrar</a></li>
+          <li id="menu-perfil-mobile" style="display:none;">
+            <a href="#" onclick="abrirPerfil(); return false;">Perfil</a>
+          </li>
+          <li id="menu-login-mobile">
+            <a href="login.html">Entrar/Cadastrar</a>
+          </li>
           <li><a href="index.html#agendar" class="btn-agendar">Agende seu horário</a></li>
         </ul>
       </nav>
@@ -80,7 +85,12 @@
           <li><a href="sobre.html">Sobre</a></li>
           <li><a href="index.html#avaliacoes">Avaliações</a></li>
           <li><a href="contatenos.html">Contate-nos</a></li>
-          <li><a href="login.html">Entrar/Cadastrar</a></li>
+          <li id="menu-perfil" style="display:none;">
+            <a href="#" onclick="abrirPerfil(); return false;">Perfil</a>
+          </li>
+          <li id="menu-login">
+            <a href="login.html">Entrar/Cadastrar</a>
+          </li>
           <li><a href="index.html#agendar" class="btn-agendar">Agende seu horário</a></li>
         </ul>
       </nav>
@@ -137,12 +147,72 @@
   </button>
 
   <!-- ============================================================
-       SCRIPTS: FIREBASE, CONTATO, REDES SOCIAIS E MENU MOBILE
+       MODAL PERFIL MODERNO
+       ============================================================ -->
+  <div id="perfil-modal">
+    <div class="perfil-card">
+      <!-- Header do Perfil -->
+      <div class="perfil-header">
+        <div class="user-icon">👤</div>
+        <h2>Meu Perfil</h2>
+        <button class="fechar-perfil" onclick="fecharPerfil()" aria-label="Fechar perfil">✕</button>
+      </div>
+
+      <!-- Conteúdo do Perfil -->
+      <div class="perfil-content">
+        <!-- Dados principais -->
+        <div id="perfil-dados"></div>
+
+        <!-- Seção de telefone -->
+        <div class="perfil-section" id="telefone-section" style="display:none;">
+          <h3>📱 Alterar Telefone</h3>
+          <input type="text" id="perfil-telefone" placeholder="Digite seu telefone">
+          <button id="btn-salvar-telefone" disabled class="btn-perfil">💾 Salvar telefone</button>
+          <div id="perfil-telefone-msg"></div>
+        </div>
+
+        <!-- Seção de email -->
+        <div class="perfil-section">
+          <h3>✉️ Gerenciar Email</h3>
+          <button id="btn-alterar-email" class="btn-perfil">🔄 Alterar Email</button>
+          
+          <div id="alteracao-email" style="display:none;" class="perfil-section">
+            <h3>🔐 Alterar Email</h3>
+            <div style="margin-bottom:16px;">
+              <label style="font-size:12px;color:#6c757d;font-weight:600;">Email atual - Código de verificação:</label>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:8px;">
+                <input type="text" id="codigo-email-atual" placeholder="Código do email atual" maxlength="6" style="flex:1;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;">
+                <button type="button" id="enviar-codigo-atual" class="btn-small btn-warning">Enviar código</button>
+              </div>
+            </div>
+            <div id="novo-email-section" style="display:none;">
+              <label style="font-size:12px;color:#6c757d;font-weight:600;">Novo email:</label>
+              <input type="email" id="novo-email" placeholder="Digite o novo email" style="width:100%;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;margin:8px 0 12px 0;box-sizing:border-box;">
+              <div style="display:flex;gap:12px;align-items:center;">
+                <input type="text" id="codigo-email-novo" placeholder="Código do novo email" maxlength="6" style="flex:1;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;">
+                <button type="button" id="verificar-email-novo" class="btn-small btn-warning">Verificar</button>
+              </div>
+            </div>
+            <button type="button" id="cancelar-alteracao-email" class="btn-small btn-secondary" style="margin-top:12px;">Cancelar</button>
+          </div>
+        </div>
+
+        <!-- Ações principais -->
+        <div class="perfil-actions">
+          <button id="btn-logout" class="btn-perfil">🚪 Sair da Conta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SCRIPTS: FIREBASE, CONTATO, REDES SOCIAIS, MENU MOBILE E PERFIL
        ============================================================
        Carrega dados do Firestore, ativa menus e botões interativos.
        ============================================================ -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script>
     // Configuração do Firebase
     const firebaseConfig = {
@@ -156,6 +226,7 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
+    const auth = firebase.auth();
 
     // Carregar contato e redes sociais do Firestore (coleção: contato, doc: info)
     db.collection("contato").doc("info").get().then((doc) => {
@@ -213,6 +284,256 @@
         e.stopPropagation();
       });
     });
+
+    // ============================================================
+    // PERFIL: Troca menu, mostra modal, logout
+    // ============================================================
+    auth.onAuthStateChanged(function(user) {
+      document.getElementById('menu-login').style.display = user ? 'none' : '';
+      document.getElementById('menu-perfil').style.display = user ? '' : 'none';
+      const menuLoginMobile = document.getElementById('menu-login-mobile');
+      const menuPerfilMobile = document.getElementById('menu-perfil-mobile');
+      if (menuLoginMobile) menuLoginMobile.style.display = user ? 'none' : '';
+      if (menuPerfilMobile) menuPerfilMobile.style.display = user ? '' : 'none';
+    });
+
+    function abrirPerfil() {
+      var modal = document.getElementById('perfil-modal');
+      var dados = document.getElementById('perfil-dados');
+      var user = auth.currentUser;
+      if (!user) return;
+      db.collection("usuarios").doc(user.uid).get().then(function(doc) {
+        var info = doc.exists ? doc.data() : {};
+        
+        // Status de verificação
+        const emailStatus = '<span class="field-status status-verified">✓ Verificado</span>';
+        // Telefone não precisa mais de verificação SMS
+        const telefoneStatus = '';
+        
+        dados.innerHTML = `
+          <!-- Campo Nome -->
+          <div class="perfil-field">
+            <div class="field-icon">👤</div>
+            <div class="field-content">
+              <div class="field-label">Nome Completo</div>
+              <div class="field-value">${info.nome || user.displayName || 'Não informado'}</div>
+            </div>
+          </div>
+
+          <!-- Campo Email -->
+          <div class="perfil-field">
+            <div class="field-icon">✉️</div>
+            <div class="field-content">
+              <div class="field-label">Email</div>
+              <div class="field-value">${user.email} ${emailStatus}</div>
+            </div>
+          </div>
+
+          <!-- Campo Telefone -->
+          <div class="perfil-field">
+            <div class="field-icon">📱</div>
+            <div class="field-content">
+              <div class="field-label">Telefone</div>
+              <div class="field-value">
+                ${info.telefone || 'Não informado'} ${info.telefone ? telefoneStatus : ''}
+                <button type="button" class="btn-small btn-warning" onclick="editarTelefone()" style="margin-left:8px;">
+                  ${info.telefone ? 'Alterar' : 'Adicionar'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        // Função para editar telefone
+        window.editarTelefone = function() {
+          const telefoneSection = document.getElementById('telefone-section');
+          const inputTelefone = document.getElementById('perfil-telefone');
+          const btnSalvar = document.getElementById('btn-salvar-telefone');
+          const msg = document.getElementById('perfil-telefone-msg');
+          
+          telefoneSection.style.display = 'block';
+          inputTelefone.value = info.telefone || '';
+          
+          // Configurar listener do input
+          const telefoneOriginal = inputTelefone.value;
+          inputTelefone.classList.remove('erro');
+          
+          inputTelefone.addEventListener('input', function() {
+            const novoTel = this.value.trim();
+            if (novoTel === telefoneOriginal) {
+              btnSalvar.disabled = true;
+              msg.style.display = 'none';
+              this.classList.remove('erro');
+            } else if (!telefoneValido(novoTel)) {
+              btnSalvar.disabled = true;
+              msg.textContent = 'Informe um telefone válido (com DDD, apenas números)';
+              msg.style.display = 'block';
+              this.classList.add('erro');
+            } else {
+              btnSalvar.disabled = false;
+              msg.style.display = 'none';
+              this.classList.remove('erro');
+            }
+          });
+          
+          inputTelefone.focus();
+        };
+        
+        modal.style.display = 'flex';
+      });
+    }
+    // Funções de verificação e utilitários
+    function gerarCodigoVerificacao() {
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    function enviarCodigoEmail(email, codigo) {
+      console.log(`Email enviado para ${email}: Código ${codigo}`);
+      alert(`Código Email simulado para ${email}: ${codigo}`);
+      return Promise.resolve(true);
+    }
+
+    function telefoneValido(telefone) {
+      return /^\d{10,11}$/.test(telefone.replace(/\D/g, ''));
+    }
+
+    // Objeto para controle de verificações no perfil
+    var perfilVerificacao = {
+      emailAtualVerificado: false,
+      codigoEmailAtual: '',
+      codigoEmailNovo: '',
+      novoEmail: ''
+    };
+
+    // Event listeners para alteração de email
+    document.getElementById('btn-alterar-email').addEventListener('click', function() {
+      document.getElementById('alteracao-email').style.display = 'block';
+      this.style.display = 'none';
+    });
+
+    document.getElementById('cancelar-alteracao-email').addEventListener('click', function() {
+      document.getElementById('alteracao-email').style.display = 'none';
+      document.getElementById('btn-alterar-email').style.display = 'block';
+      document.getElementById('novo-email-section').style.display = 'none';
+      perfilVerificacao.emailAtualVerificado = false;
+    });
+
+    document.getElementById('enviar-codigo-atual').addEventListener('click', function() {
+      const user = auth.currentUser;
+      if (!user) return;
+      
+      perfilVerificacao.codigoEmailAtual = gerarCodigoVerificacao();
+      enviarCodigoEmail(user.email, perfilVerificacao.codigoEmailAtual);
+      
+      this.textContent = 'Código enviado';
+      this.disabled = true;
+      setTimeout(() => {
+        this.textContent = 'Reenviar código';
+        this.disabled = false;
+      }, 30000);
+    });
+
+    document.getElementById('codigo-email-atual').addEventListener('input', function() {
+      if (this.value.trim() === perfilVerificacao.codigoEmailAtual) {
+        perfilVerificacao.emailAtualVerificado = true;
+        document.getElementById('novo-email-section').style.display = 'block';
+        this.style.borderColor = '#28a745';
+        this.style.background = '#d4edda';
+      } else {
+        perfilVerificacao.emailAtualVerificado = false;
+        document.getElementById('novo-email-section').style.display = 'none';
+        this.style.borderColor = '';
+        this.style.background = '';
+      }
+    });
+
+    document.getElementById('novo-email').addEventListener('input', function() {
+      const novoEmail = this.value.trim();
+      if (novoEmail && novoEmail.includes('@') && novoEmail !== auth.currentUser.email) {
+        perfilVerificacao.novoEmail = novoEmail;
+        perfilVerificacao.codigoEmailNovo = gerarCodigoVerificacao();
+        enviarCodigoEmail(novoEmail, perfilVerificacao.codigoEmailNovo);
+      }
+    });
+
+    document.getElementById('verificar-email-novo').addEventListener('click', function() {
+      const codigoDigitado = document.getElementById('codigo-email-novo').value.trim();
+      if (codigoDigitado === perfilVerificacao.codigoEmailNovo && perfilVerificacao.emailAtualVerificado) {
+        const user = auth.currentUser;
+        user.updateEmail(perfilVerificacao.novoEmail).then(function() {
+          return db.collection("usuarios").doc(user.uid).update({
+            email: perfilVerificacao.novoEmail
+          });
+        }).then(function() {
+          alert('Email alterado com sucesso!');
+          fecharPerfil();
+          window.location.reload();
+        }).catch(function(error) {
+          alert('Erro ao alterar email: ' + error.message);
+        });
+      } else {
+        alert('Código incorreto ou email atual não verificado.');
+      }
+    });
+
+    // Função para salvar telefone (sem verificação SMS)
+    document.getElementById('btn-salvar-telefone').onclick = function() {
+      var user = auth.currentUser;
+      var inputTel = document.getElementById('perfil-telefone');
+      var novoTelefone = inputTel.value.trim();
+      var msg = document.getElementById('perfil-telefone-msg');
+      
+      if (!user || !telefoneValido(novoTelefone)) {
+        inputTel.classList.add('erro');
+        msg.textContent = 'Informe um telefone válido (com DDD, apenas números)';
+        msg.style.display = 'block';
+        return;
+      }
+
+      // Verificar se é diferente do telefone atual
+      db.collection("usuarios").doc(user.uid).get().then(function(doc) {
+        const dadosAtuais = doc.exists ? doc.data() : {};
+        if (dadosAtuais.telefone === novoTelefone) {
+          alert('Este já é seu telefone atual.');
+          return;
+        }
+
+        // Salvar telefone diretamente sem verificação SMS
+        this.disabled = true;
+        this.textContent = 'Salvando...';
+        
+        db.collection("usuarios").doc(user.uid).update({ 
+          telefone: novoTelefone,
+          telefoneVerificado: false // Não verificado por SMS, mas aceito
+        })
+        .then(function() {
+          alert('Telefone salvo com sucesso!');
+          fecharPerfil();
+        }.bind(this))
+        .catch(function() {
+          alert('Erro ao salvar telefone.');
+          this.disabled = false;
+          this.textContent = '💾 Salvar telefone';
+        }.bind(this));
+      }.bind(this));
+    };
+
+    function fecharPerfil() {
+      document.getElementById('perfil-modal').style.display = 'none';
+      document.getElementById('telefone-section').style.display = 'none';
+      document.getElementById('perfil-telefone-msg').style.display = 'none';
+      document.getElementById('alteracao-email').style.display = 'none';
+      document.getElementById('btn-alterar-email').style.display = 'block';
+      // Reset do estado de verificação (apenas email)
+      perfilVerificacao.emailAtualVerificado = false;
+      document.getElementById('novo-email-section').style.display = 'none';
+    }
+    document.getElementById('btn-logout').onclick = function() {
+      auth.signOut().then(function() {
+        fecharPerfil();
+        window.location.reload();
+      });
+    };
   </script>
   <script src="contatenos.js"></script>
 </body>

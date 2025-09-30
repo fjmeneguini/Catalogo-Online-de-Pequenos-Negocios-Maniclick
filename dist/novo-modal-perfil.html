@@ -1,0 +1,58 @@
+  <!-- ============================================================
+       MODAL PERFIL MODERNO
+       ============================================================ -->
+  <div id="perfil-modal">
+    <div class="perfil-card">
+      <!-- Header do Perfil -->
+      <div class="perfil-header">
+        <div class="user-icon">👤</div>
+        <h2>Meu Perfil</h2>
+        <button class="fechar-perfil" onclick="fecharPerfil()" aria-label="Fechar perfil">✕</button>
+      </div>
+
+      <!-- Conteúdo do Perfil -->
+      <div class="perfil-content">
+        <!-- Dados principais -->
+        <div id="perfil-dados"></div>
+
+        <!-- Seção de telefone -->
+        <div class="perfil-section" id="telefone-section" style="display:none;">
+          <h3>📱 Alterar Telefone</h3>
+          <input type="text" id="perfil-telefone" placeholder="Digite seu telefone">
+          <button id="btn-salvar-telefone" disabled class="btn-perfil">💾 Salvar telefone</button>
+          <div id="perfil-telefone-msg"></div>
+        </div>
+
+        <!-- Seção de email -->
+        <div class="perfil-section">
+          <h3>✉️ Gerenciar Email</h3>
+          <button id="btn-alterar-email" class="btn-perfil">🔄 Alterar Email</button>
+          
+          <div id="alteracao-email" style="display:none;" class="perfil-section">
+            <h3>🔐 Alterar Email</h3>
+            <div style="margin-bottom:16px;">
+              <label style="font-size:12px;color:#6c757d;font-weight:600;">Email atual - Código de verificação:</label>
+              <div style="display:flex;gap:12px;align-items:center;margin-top:8px;">
+                <input type="text" id="codigo-email-atual" placeholder="Código do email atual" maxlength="6" style="flex:1;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;">
+                <button type="button" id="enviar-codigo-atual" class="btn-small btn-warning">Enviar código</button>
+              </div>
+            </div>
+            <div id="novo-email-section" style="display:none;">
+              <label style="font-size:12px;color:#6c757d;font-weight:600;">Novo email:</label>
+              <input type="email" id="novo-email" placeholder="Digite o novo email" style="width:100%;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;margin:8px 0 12px 0;box-sizing:border-box;">
+              <div style="display:flex;gap:12px;align-items:center;">
+                <input type="text" id="codigo-email-novo" placeholder="Código do novo email" maxlength="6" style="flex:1;padding:8px 12px;border:2px solid #e9ecef;border-radius:8px;">
+                <button type="button" id="verificar-email-novo" class="btn-small btn-warning">Verificar</button>
+              </div>
+            </div>
+            <button type="button" id="cancelar-alteracao-email" class="btn-small btn-secondary" style="margin-top:12px;">Cancelar</button>
+          </div>
+        </div>
+
+        <!-- Ações principais -->
+        <div class="perfil-actions">
+          <button id="btn-logout" class="btn-perfil">🚪 Sair da Conta</button>
+        </div>
+      </div>
+    </div>
+  </div>
