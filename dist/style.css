@@ -440,6 +440,12 @@ footer .contato {
 /* ============================================================
    MAPA INCORPORADO
    ============================================================ */
+.sessao-mapa {
+  display: block;
+  visibility: visible;
+  padding: 40px 20px;
+  text-align: center;
+}
 .mapa {
   width: 100%;
   max-width: 1100px;
@@ -1230,17 +1236,30 @@ footer .final {
   }
 }
 @media (max-width: 900px) {
+  .galeria {
+    display: block !important;
+    visibility: visible !important;
+    padding: 40px 10px !important;
+  }
   .galeria .grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    display: grid !important;
+    visibility: visible !important;
   }
   .galeria .grid img {
-    height: 120px;
+    height: 120px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
   }
   .hero {
     padding: 60px 10px;
   }
   .sobre, .galeria, .servicos, .depoimentos, .contato {
-    padding: 40px 10px;
+    padding: 40px 10px !important;
+    display: block !important;
+    visibility: visible !important;
   }
   .servicos ul {
     grid-template-columns: repeat(2, 1fr); 
@@ -1334,13 +1353,31 @@ footer .final {
   }
 }
 @media (max-width: 1200px) {
+  .depoimentos {
+    display: block !important;
+    visibility: visible !important;
+  }
   .depoimentos-grid {
     grid-template-columns: repeat(2, 1fr);
+    display: grid !important;
+    visibility: visible !important;
   }
 }
 @media (max-width: 800px) {
+  .depoimentos {
+    display: block !important;
+    visibility: visible !important;
+    padding: 40px 10px !important;
+  }
   .depoimentos-grid {
     grid-template-columns: 1fr;
+    display: grid !important;
+    visibility: visible !important;
+    gap: 20px !important;
+  }
+  .depoimentos-grid blockquote {
+    transform: none !important;
+    margin: 0 !important;
   }
 }
 @media (max-width: 400px) {
@@ -1612,19 +1649,36 @@ img:focus:not(:focus-visible) {
 }
 @media (max-width: 600px) {
   body {
-    display: block !important;
-    flex-direction: unset !important;
-    min-height: unset !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
   }
 }
 @media (max-width: 600px) {
   .topo-float {
-    z-index: 9999 !important;
+    z-index: 10000 !important;
     pointer-events: auto !important;
     position: fixed !important;
-    left: 10px !important;
-    bottom: 25px !important;
-    display: flex !important;
+    left: 15px !important;
+    bottom: 30px !important;
+    display: block !important;
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 22px !important;
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 50% !important;
+    background: #d63384 !important;
+    color: white !important;
+    box-shadow: 0 6px 20px rgba(214,51,132,0.5) !important;
+    text-align: center !important;
+    line-height: 60px !important;
+    font-weight: bold !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
   }
 }
 /* ============================================================
@@ -1707,13 +1761,50 @@ img:focus:not(:focus-visible) {
   color: #fff !important;
   box-shadow: 0 4px 16px #d6338444;
 }
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  .contato {
+    display: block !important;
+    visibility: visible !important;
+    padding: 40px 10px !important;
+  }
   .agendar-card {
+    display: flex !important;
+    visibility: visible !important;
+    max-width: 95vw;
+    padding: 24px 16px;
+  }
+  .sessao-mapa {
+    display: block !important;
+    visibility: visible !important;
+    padding: 40px 15px !important;
+  }
+  .mapa {
+    height: 200px !important;
+  }
+}
+@media (max-width: 600px) {
+  .contato {
+    display: block !important;
+    visibility: visible !important;
+    padding: 30px 5px !important;
+  }
+  .agendar-card {
+    display: flex !important;
+    visibility: visible !important;
     max-width: 98vw;
     padding: 18px 4vw 18px 4vw;
   }
   .agendar-header h2 {
     font-size: 1.3em;
+  }
+  .sessao-mapa {
+    display: block !important;
+    visibility: visible !important;
+    padding: 30px 10px !important;
+  }
+  .mapa {
+    height: 250px !important;
+    margin: 10px auto !important;
   }
 }
 /* ============================================================
@@ -2340,3 +2431,156 @@ img:focus:not(:focus-visible) {
     #btn-logout:hover {
       background: #a11a1a;
     }
+
+/* ============================================================
+   CORREÇÕES DEFINITIVAS PARA MOBILE - TODAS AS SEÇÕES
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero, 
+  .servicos, 
+  .galeria, 
+  .depoimentos, 
+  .contato, 
+  .sessao-mapa,
+  main {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: visible !important;
+    z-index: auto !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Correção específica da sobreposição */
+  .sessao-mapa {
+    position: relative !important;
+    z-index: 1 !important;
+    margin-top: 30px !important;
+    clear: both !important;
+  }
+  
+  .contato {
+    position: relative !important;
+    z-index: 2 !important;
+    margin-bottom: 40px !important;
+  }
+  
+  /* Galeria específica */
+  .galeria .grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  
+  /* Depoimentos específico */
+  .depoimentos-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+    width: 100% !important;
+  }
+  
+  /* Agendamento específico */
+  .agendar-card {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 95% !important;
+    max-width: 95vw !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  
+  .btn-agendar-form {
+    display: block !important;
+    width: 100% !important;
+    padding: 15px !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    z-index: 20 !important;
+    position: relative !important;
+  }
+  
+  /* Mapa específico - borda limpa */
+  .sessao-mapa {
+    padding: 40px 15px 20px 15px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 30px 0 15px 0 !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
+  .sessao-mapa .titulo-sessao {
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(214,51,132,0.2) !important;
+    background: linear-gradient(135deg, #d63384, #e91e63) !important;
+    margin: 0 auto 25px auto !important;
+    padding: 14px 18px !important;
+    border-radius: 20px !important;
+    color: white !important;
+    font-size: 1.3em !important;
+    font-weight: bold !important;
+    max-width: 250px !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    display: block !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+  
+  .mapa {
+    width: 95% !important;
+    height: 220px !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    border: none !important;
+    box-shadow: 0 6px 20px rgba(214,51,132,0.15) !important;
+    margin: 0 auto !important;
+    max-width: calc(100vw - 30px) !important;
+    background: white !important;
+  }
+  
+  .mapa iframe {
+    width: 100% !important;
+    height: 220px !important;
+    border: none !important;
+    border-radius: 18px !important;
+    display: block !important;
+  }
+  
+  /* Melhorar interatividade de todos os botões em mobile */
+  button, 
+  .btn, 
+  .btn-agendar, 
+  .topo-float,
+  input[type="submit"],
+  input[type="button"] {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    min-height: 44px !important;
+  }
+  
+  /* Garantir que links também funcionem */
+  a {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1) !important;
+  }
+}

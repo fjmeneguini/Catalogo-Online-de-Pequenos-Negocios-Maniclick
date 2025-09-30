@@ -212,7 +212,7 @@
   <!-- ============================================================
        BOTÃO FLUTUANTE VOLTAR AO TOPO
        ============================================================ -->
-  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="topo-float" aria-label="Voltar ao topo">
+  <button id="botao-topo" class="topo-float" aria-label="Voltar ao topo">
     ▲
   </button>
   <!-- ============================================================
@@ -827,6 +827,32 @@
       });
     };
   </script>
+  
+  <!-- ============================================================
+       JAVASCRIPT BOTÃO VOLTAR AO TOPO - VERSÃO SIMPLES E ROBUSTA
+       ============================================================ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const botaoTopo = document.getElementById('botao-topo');
+      
+      function voltarAoTopo() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+      
+      // Event listeners para click e touch
+      botaoTopo.addEventListener('click', voltarAoTopo);
+      botaoTopo.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        voltarAoTopo();
+      });
+      
+      // Garantir que o botão é sempre clicável
+      botaoTopo.style.pointerEvents = 'auto';
+      botaoTopo.style.cursor = 'pointer';
+    });
+  </script>
+  
   <!-- ============================================================
        BOTÃO FLUTUANTE WHATSAPP
        ============================================================ -->
